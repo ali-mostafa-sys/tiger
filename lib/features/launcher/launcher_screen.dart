@@ -18,7 +18,8 @@ class _LauncherScreenState extends State<LauncherScreen> {
             onPressed: (){
               AutoRouter.of(context).pushNamed('/login');
             },
-            child: Text('anwdakdnakdnpad'),
+            child: Text('anwdaakdnpad'),
+            
           ),
         ),
       ),
