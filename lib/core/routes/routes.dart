@@ -5,7 +5,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:tiger/features/auth/presentation/pages/login_screen/login_screen.dart';
 import 'package:tiger/features/auth/presentation/pages/register_screen/register_screen.dart';
-import 'package:tiger/features/launcher/launcher_screen.dart';
+import 'package:tiger/features/auth/presentation/pages/launcher_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',

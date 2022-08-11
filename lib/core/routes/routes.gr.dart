@@ -17,7 +17,7 @@ import '../../features/auth/presentation/pages/login_screen/login_screen.dart'
     as _i2;
 import '../../features/auth/presentation/pages/register_screen/register_screen.dart'
     as _i3;
-import '../../features/launcher/launcher_screen.dart' as _i1;
+import '../../features/auth/presentation/pages/launcher_screen.dart' as _i1;
 
 class AppRouter extends _i4.RootStackRouter {
   AppRouter([_i5.GlobalKey<_i5.NavigatorState>? navigatorKey])
