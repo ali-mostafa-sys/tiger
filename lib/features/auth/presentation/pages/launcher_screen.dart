@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/routes/routes.gr.dart';
+import '../widgets/money_animation_widget.dart';
+
 class LauncherScreen extends StatefulWidget {
   const LauncherScreen({Key? key}) : super(key: key);
 
@@ -9,19 +12,126 @@ class LauncherScreen extends StatefulWidget {
 }
 
 class _LauncherScreenState extends State<LauncherScreen> {
+  bool _display = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _display = true;
+    Future.delayed(const Duration(seconds: 11, milliseconds: 500), () {
+      print('One second has passed.');
+      AutoRouter.of(context).pushAndPopUntil(LoginRoute(),
+          predicate: (route) => false); // Prints after 1 second.
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: TextButton(
-            onPressed: (){
-              AutoRouter.of(context).pushNamed('/login');
-            },
-            child: Text('anwdaakdnpad'),
-            
+    List<Widget> rainRow = [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RainWidget(display: _display, duration: 9, delay: 3),
+          RainWidget(display: _display, duration: 9, delay: 3),
+          RainWidget(display: _display, duration: 10, delay: 3),
+          RainWidget(display: _display, duration: 10, delay: 3),
+        ],
+      ),
+
+      //////////////////////////////////////
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          RainWidget(
+            display: _display,
+            duration: 10,
+            delay: 2,
           ),
-        ),
+          RainWidget(display: _display, duration: 9, delay: 2),
+          RainWidget(display: _display, duration: 11, delay: 2),
+          RainWidget(display: _display, duration: 10, delay: 2),
+        ],
+      ),
+      //////////////////////////////////////
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          RainWidget(
+            display: _display,
+            duration: 10,
+            delay: 1,
+          ),
+          RainWidget(
+            display: _display,
+            duration: 8,
+            delay: 1,
+          ),
+          RainWidget(
+            display: _display,
+            duration: 11,
+            delay: 1,
+          ),
+          RainWidget(
+            display: _display,
+            duration: 9,
+            delay: 1,
+          ),
+        ],
+      ),
+      // //////////////////////////////////////
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          RainWidget(
+            display: _display,
+            duration: 9,
+            delay: 0,
+          ),
+          RainWidget(
+            display: _display,
+            duration: 11,
+            delay: 0,
+          ),
+          RainWidget(
+            display: _display,
+            duration: 9,
+            delay: 0,
+          ),
+          RainWidget(
+            display: _display,
+            duration: 10,
+            delay: 0,
+          ),
+        ],
+      ),
+    ];
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+              image: AssetImage('assets/images/1.png'),
+              fit: BoxFit.cover,
+            )),
+          ),
+          //////////////////////////////
+          Container(
+            color: Colors.black.withOpacity(0.5),
+          ),
+          /////////////////////////////////
+          SingleChildScrollView(
+            physics: const NeverScrollableScrollPhysics(),
+            child: Column(
+              children: rainRow.map((e) {
+                return e;
+              }).toList(),
+            ),
+          ),
+        ],
       ),
     );
   }

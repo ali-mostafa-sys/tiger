@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: appTheme,
         routeInformationParser: _appRouter.defaultRouteParser(),
         routerDelegate: _appRouter.delegate(),
-
+        debugShowCheckedModeBanner: false,
     );
   }
 

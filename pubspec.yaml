@@ -43,6 +43,7 @@ dependencies:
   shared_preferences:
   hexcolor:
   auto_route: ^3.2.0
+  animated_widgets:
 
 
 
