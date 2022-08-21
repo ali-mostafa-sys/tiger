@@ -38,3 +38,17 @@ class ObscureTextState extends LoginState{
   @override
   List<Object> get props=>[obscureText];
 }
+
+class LoadingGetEmailAndFullNameState extends LoginState{
+}
+
+class LoadedGetEmailAndFullNameState extends LoginState{
+
+}
+
+class ErrorGetEmailAndFullNameState extends LoginState{
+  final String error;
+  const ErrorGetEmailAndFullNameState({required this.error});
+  @override
+  List<Object> get props => [error];
+}

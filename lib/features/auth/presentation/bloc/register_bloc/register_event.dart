@@ -18,3 +18,7 @@ class ObscureTextEvent extends RegisterEvent{
   @override
   List<Object> get props => [];
 }
+class GetEmailAndFullNameEvent extends RegisterEvent{
+  @override
+  List<Object> get props => [];
+}

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+
 import '../../../../core/routes/routes.gr.dart';
 import '../widgets/money_animation_widget.dart';
 
@@ -108,30 +109,32 @@ class _LauncherScreenState extends State<LauncherScreen> {
       ),
     ];
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage('assets/images/1.png'),
-              fit: BoxFit.cover,
-            )),
-          ),
-          //////////////////////////////
-          Container(
-            color: Colors.black.withOpacity(0.5),
-          ),
-          /////////////////////////////////
-          SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            child: Column(
-              children: rainRow.map((e) {
-                return e;
-              }).toList(),
+      body: Center(
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('assets/images/1.png'),
+                fit: BoxFit.cover,
+              )),
             ),
-          ),
-        ],
+            //////////////////////////////
+            Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+            /////////////////////////////////
+            SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                children: rainRow.map((e) {
+                  return e;
+                }).toList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

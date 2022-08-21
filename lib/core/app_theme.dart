@@ -16,6 +16,8 @@ final appTheme=ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     fillColor:fillTextFormColor ,
     filled: true,
+    errorMaxLines: 3,
+    
     labelStyle: TextStyle(color: primaryColor,fontWeight: FontWeight.bold),
     floatingLabelStyle: TextStyle(color: primaryColor,fontWeight: FontWeight.bold,),
     focusedBorder: OutlineInputBorder(

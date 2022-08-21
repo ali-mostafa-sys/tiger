@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tiger/core/errors/exceptions.dart';
+import 'package:tiger/features/auth/data/models/google_model.dart';
 import 'package:tiger/features/auth/data/models/login_model.dart';
 import 'package:tiger/features/auth/data/models/register_model.dart';
 import 'package:http/http.dart' as http;
@@ -10,6 +12,7 @@ abstract class AuthDataSource {
   Future<UserDataModel> postRegister(RegisterModel registerModel);
 
   Future<UserDataModel> postLogin(LoginModel loginModel);
+  Future<GoogleModel> getGoogleEmail();
 }
 
 const BASE_URL = '';
@@ -46,4 +49,22 @@ class AuthDataSourceImpl implements AuthDataSource {
       throw ServerException();
     }
   }
+
+  Future<GoogleModel> getGoogleEmail() async {
+    final GoogleModel? googleModel;
+    final googleSignIn = GoogleSignIn();
+    GoogleSignInAccount? googleUser;
+
+    googleUser = await googleSignIn.signIn();
+    if (googleUser == null) {
+      throw Exception('no google user');
+    }
+    googleModel = GoogleModel(
+        email: googleUser.email.toString(),
+        firstName: googleUser.displayName!.split(' ')[0].toString(),
+        lastName: googleUser.displayName!.split(' ')[1].toString(),
+    );
+    return googleModel;
+  }
+
 }

@@ -1,4 +1,4 @@
-package com.example.tiger;
+package com.intellitech.tiger;
 
 import io.flutter.embedding.android.FlutterActivity;
 

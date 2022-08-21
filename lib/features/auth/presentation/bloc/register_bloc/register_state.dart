@@ -37,3 +37,17 @@ class ObscureTextState extends RegisterState{
   @override
   List<Object> get props => [obscureText];
 }
+
+class LoadingGetEmailAndFullNameState extends RegisterState{
+}
+
+class LoadedGetEmailAndFullNameState extends RegisterState{
+
+}
+
+class ErrorGetEmailAndFullNameState extends RegisterState{
+ final String error;
+  const ErrorGetEmailAndFullNameState({required this.error});
+ @override
+ List<Object> get props => [error];
+}

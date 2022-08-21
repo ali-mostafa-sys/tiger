@@ -1,57 +1,82 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiger/core/errors/failures.dart';
 import 'package:tiger/core/strings/consts.dart';
 import 'package:tiger/core/strings/failures_massage.dart';
+import 'package:tiger/features/auth/domain/entity/google_entity.dart';
 import 'package:tiger/features/auth/domain/entity/login_entity.dart';
 import 'package:tiger/features/auth/domain/entity/user_data_entity.dart';
+import 'package:tiger/features/auth/domain/use_case/google_use_case.dart';
 import 'package:tiger/features/auth/domain/use_case/login_use_case.dart';
 
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  static LoginBloc get(context)=>BlocProvider.of(context);
+  static LoginBloc get(context) => BlocProvider.of(context);
 
   final LoginUseCase loginUseCase;
   final SharedPreferences sharedPreferences;
-  bool obscureText=true;
+  final GoogleUseCase googleUseCase;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  bool obscureText = true;
 
+  TextEditingController email = TextEditingController();
 
-
-  LoginBloc({required this.loginUseCase,required this.sharedPreferences}) : super(LoginInitial()) {
-    on<LoginEvent>((event, emit) async{
-
-      if(event is LoginButtonEvent){
+  LoginBloc(
+      {required this.loginUseCase,
+      required this.sharedPreferences,
+      required this.googleUseCase})
+      : super(LoginInitial()) {
+    on<LoginEvent>((event, emit) async {
+      if (event is LoginButtonEvent) {
         emit(LoadingLoginState());
-        final failureOrLogin= await loginUseCase(event.loginEntity);
-        failureOrLogin.fold(
-                (failure) {
-                  emit(ErrorLoginState(error: _mapFailureToMessage(failure)));
+        final failureOrLogin = await loginUseCase(event.loginEntity);
 
-
-                },
-                (login) async{
-                  TOKEN=await sharedPreferences.getString('USER_TOKEN').toString();
-                  emit(LoadedLoginState(userDataEntity: login));
-
-                });
-
-
+        failureOrLogin.fold((failure) {
+          emit(ErrorLoginState(error: _mapFailureToMessage(failure)));
+          print('failure');
+        }, (login) async {
+          TOKEN = await sharedPreferences.getString('USER_TOKEN').toString();
+          emit(LoadedLoginState(userDataEntity: login));
+          print('ok');
+        });
       }
-      if(event is ObscureTextEvent){
-        obscureText=!obscureText;
+      if (event is ObscureTextEvent) {
+        obscureText = !obscureText;
         emit(ObscureTextState(obscureText: obscureText));
+      }
+      if (event is GetEmailAndFullNameEvent) {
+        emit(LoadingGetEmailAndFullNameState());
+        final failureOrGetEmail = await googleUseCase();
+        _getEmailFunction(failureOrGetEmail).then((value) async {
+          await _googleSignIn.disconnect();
+        });
       }
     });
   }
 
-  String _mapFailureToMessage(Failure failure){
-    switch(failure.runtimeType){
+  Future _getEmailFunction(
+      Either<Failure, GoogleEntity> failureOrGetEmail) async {
+    failureOrGetEmail.fold((failure) {
+      emit(ErrorGetEmailAndFullNameState(error: _mapFailureToMessage(failure)));
+    }, (getEmail) {
+      email.text = getEmail.email;
+      print(email.text);
+      emit(LoadedGetEmailAndFullNameState());
+    });
+  }
+
+  String _mapFailureToMessage(Failure failure) {
+    switch (failure.runtimeType) {
       case ServerFailure:
         return SERVER_FAILURE_MESSAGE;
       case OfflineFailure:

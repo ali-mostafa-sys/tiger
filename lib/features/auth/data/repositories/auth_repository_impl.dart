@@ -7,6 +7,7 @@ import 'package:tiger/features/auth/data/data_source/auth_local_data_source.dart
 import 'package:tiger/features/auth/data/models/login_model.dart';
 import 'package:tiger/features/auth/data/models/register_model.dart';
 import 'package:tiger/features/auth/data/models/user_data_model.dart';
+import 'package:tiger/features/auth/domain/entity/google_entity.dart';
 import 'package:tiger/features/auth/domain/entity/login_entity.dart';
 import 'package:tiger/features/auth/domain/entity/register_entity.dart';
 import 'package:tiger/features/auth/domain/repositories/auth_repository.dart';
@@ -47,7 +48,7 @@ class AuthRepositoryImpl implements AuthRepository {
         lastName: registerEntity.lastName,
         email: registerEntity.email,
         password: registerEntity.password,
-        phoneNumber: registerEntity.phoneNumber,
+       // phoneNumber: registerEntity.phoneNumber,
         macAddress: registerEntity.macAddress);
     if (await networkInfo.isConnected) {
       try {
@@ -64,30 +65,20 @@ class AuthRepositoryImpl implements AuthRepository {
 
   }
 
-  // Future<Either<Failure, UserDataModel>>_getDataOrMassage(Future<UserDataModel> loginOrRegister())async{
-  //   if (await networkInfo.isConnected) {
-  //     try {
-  //     final ali=  loginOrRegister();
-  //       await authLocalDataSource.getToken(loginOrRegister().tokenEntity!.token.toString());
-  //       return Future.value(Right(ali));
-  //     } on ServerException {
-  //       return left(ServerFailure());
-  //     }
-  //   } else {
-  //     return Left(OfflineFailure());
-  //   }
-  //
-  // }
-  // Future<Either<Failure, UserDataModel>> _getDataOrMassage( LoginOrRegister loginOrRegister)async{
-  //   if (await networkInfo.isConnected) {
-  //     try  {
-  //        await loginOrRegister;
-  //       return  Right(loginOrRegister);
-  //     } on ServerException {
-  //       return left(ServerFailure());
-  //     }
-  //   } else {
-  //     return Left(OfflineFailure());
-  //   }
-  // }
+  @override
+  Future<Either<Failure, GoogleEntity>> getGoogleEmail() async{
+   if(await networkInfo.isConnected){
+     try{
+       final response=await authDataSource.getGoogleEmail();
+       return Right(response);
+
+     }on ServerException{
+       return left(ServerFailure());
+     }
+   }else{
+     return Left(OfflineFailure());
+   }
+  }
+
+
 }

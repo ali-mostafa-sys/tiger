@@ -22,3 +22,6 @@ class ObscureTextEvent extends LoginEvent{
   List<Object> get props => [];
 
 }
+
+class GetEmailAndFullNameEvent extends LoginEvent{}
+
