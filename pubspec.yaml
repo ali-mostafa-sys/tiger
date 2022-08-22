@@ -49,6 +49,7 @@ dependencies:
   google_sign_in:
   mac_address: ^1.0.0
   easy_localization: ^3.0.0
+  google_mobile_ads : ^1.0.0
 
 
 

@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tiger/core/app_theme.dart';
 
 import 'package:tiger/core/localizations/app_loaclizations.dart';
+import 'package:tiger/core/utils/snachbar_message.dart';
 import 'package:tiger/core/widgets/button_widget.dart';
+import 'package:tiger/core/widgets/loading_widget.dart';
 
 import 'package:tiger/core/widgets/text_form_field_widget.dart';
 import 'package:tiger/features/auth/domain/entity/register_entity.dart';
@@ -32,9 +34,29 @@ class RegisterScreen extends StatelessWidget {
 
   Widget _buildBody() {
     return BlocConsumer<RegisterBloc, RegisterState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is LoadedRegisterState) {
+          if (state.userDataEntity.statue == 200) {
+            SnackBarMessage().showSnackBar(
+                message: state.userDataEntity.massage.toString(),
+                backgroundColor: Colors.green,
+                context: context);
+          } else {
+            SnackBarMessage().showSnackBar(
+                message: state.userDataEntity.massage.toString(),
+                backgroundColor: Colors.redAccent,
+                context: context);
+          }
+        }
+        if(state is ErrorRegisterState){
+          SnackBarMessage().showSnackBar(message: state.error.toString(), backgroundColor: Colors.redAccent, context: context);
+        }
+      },
       builder: (context, state) {
         var bloc = RegisterBloc.get(context);
+        if(state is LoadingRegisterState){
+          return const LoadingWidget();
+        }
         return GlowingOverscrollIndicator(
           axisDirection: AxisDirection.down,
           color: primaryColor,
@@ -77,7 +99,7 @@ class RegisterScreen extends StatelessWidget {
                           prefixIcon: const Icon(Icons.lock),
                           suffixIcon: IconButton(
                               onPressed: () {
-                                bloc..add(ObscureTextEvent());
+                                bloc.add(ObscureTextEvent());
                               },
                               icon: Icon(bloc.obscureText
                                   ? Icons.visibility
@@ -117,7 +139,7 @@ class RegisterScreen extends StatelessWidget {
                           prefixIcon: const Icon(Icons.lock),
                           suffixIcon: IconButton(
                               onPressed: () {
-                                bloc..add(ObscureTextEvent());
+                                bloc.add(ObscureTextEvent());
                               },
                               icon: Icon(bloc.obscureText
                                   ? Icons.visibility
@@ -156,7 +178,7 @@ class RegisterScreen extends StatelessWidget {
                                       macAddress: bloc.macAddress);
                                   bloc.add(RegisterButtonEvent(
                                       registerEntity: registerEntity));
-                                  print(bloc.firstName,);
+
                                 } else {
                                   final registerEntity = RegisterEntity(
                                       firstName: bloc.firstName,
@@ -168,7 +190,7 @@ class RegisterScreen extends StatelessWidget {
                                           invitationCode.text.toString());
                                   bloc.add(RegisterButtonEvent(
                                       registerEntity: registerEntity));
-                                  print(bloc.macAddress);
+
                                 }
                               }
                             }),

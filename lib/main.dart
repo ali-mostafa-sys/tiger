@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:tiger/core/app_theme.dart';
 import 'package:tiger/core/routes/routes.gr.dart';
 import 'package:tiger/features/auth/presentation/bloc/login_bloc/login_bloc.dart';
@@ -10,6 +11,7 @@ import 'injection_container.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await di.init();
   runApp(MyApp());
 }
