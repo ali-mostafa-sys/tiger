@@ -8,6 +8,8 @@ import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_blo
 import 'core/localizations/app_loaclizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'injection_container.dart' as di;
+import 'package:flutter/services.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +26,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => di.sl<LoginBloc>()),
