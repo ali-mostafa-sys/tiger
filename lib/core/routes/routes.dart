@@ -2,13 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:tiger/features/auth/presentation/pages/login_screen/login_screen.dart';
 import 'package:tiger/features/auth/presentation/pages/register_screen/register_screen.dart';
 import 'package:tiger/features/auth/presentation/pages/launcher_screen.dart';
+import 'package:tiger/features/fortune_wheel/presentation/pages/profile_page.dart';
 
 import '../../features/fortune_wheel/presentation/pages/wheel_page.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
-    // AutoRoute(path: '/', page: LauncherScreen, initial: false),
+     AutoRoute(path: '/', page: LauncherScreen, initial: true),
     
     AutoRoute(
       path: '/login',
@@ -24,8 +25,12 @@ import '../../features/fortune_wheel/presentation/pages/wheel_page.dart';
         path: '/homePage',
         name: 'homePageRoute',
         page: WheelPage,
-        initial: true
         ),
+    AutoRoute(
+      path: '/profile',
+      name: 'ProfileRoute',
+      page: ProfilePage,
+    ),
   ],
 )
 class $AppRouter {}
