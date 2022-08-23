@@ -30,7 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
     if (await networkInfo.isConnected) {
       try {
         final authResponse = await authDataSource.postLogin(loginModel);
-        await authLocalDataSource.getToken(authResponse.tokenEntity!.token.toString());
+        await authLocalDataSource.getToken(authResponse.data!.token.toString());
         return Right(authResponse);
       } on ServerException {
         return left(ServerFailure());
@@ -48,12 +48,11 @@ class AuthRepositoryImpl implements AuthRepository {
         lastName: registerEntity.lastName,
         email: registerEntity.email,
         password: registerEntity.password,
-       // phoneNumber: registerEntity.phoneNumber,
         macAddress: registerEntity.macAddress);
     if (await networkInfo.isConnected) {
       try {
         final authResponse = await authDataSource.postRegister(registerModel);
-        await authLocalDataSource.getToken(authResponse.tokenEntity!.token.toString());
+        await authLocalDataSource.getToken(authResponse.data!.token.toString());
         return Right(authResponse);
       } on ServerException {
         return left(ServerFailure());

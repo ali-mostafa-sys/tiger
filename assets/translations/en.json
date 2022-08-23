@@ -5,7 +5,7 @@
   "Pleas insert a correct Email": "Pleas insert a correct Email",
 
 "Password": "Password",
-  "Password must be more than 6 characters": "Password must be more than 6 characters",
+  "Password must be more than 8 characters": "Password must be more than 8 characters",
   "Password should not be more than 20 characters": "Password should not be more than 20 characters",
   "Password must has upper case characters": "Password must has upper case characters",
   "Password must has lower case characters": "Password must has lower case characters",

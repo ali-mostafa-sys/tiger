@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.sl<RegisterBloc>()),
       ],
       child: MaterialApp.router(
-        supportedLocales: [Locale('en'), Locale('ar')],
+        supportedLocales:const [Locale('en'), Locale('ar')],
         localizationsDelegates: const [
           //  CountryLocalizations.delegate,
           AppLocalizations.delegate,

@@ -41,7 +41,7 @@ class AuthDataSourceImpl implements AuthDataSource {
     final uri = Uri.https(BASE_URL, '');
     final response =
         await client.post(uri, body: userDataRegisterModel.toJson());
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       final data = jsonDecode(response.body);
       final userDataModel = UserDataModel.fromJson(data);
       return userDataModel;

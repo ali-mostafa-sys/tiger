@@ -15,7 +15,7 @@ import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_blo
 import 'package:tiger/features/auth/presentation/widgets/bottom_text_widget.dart';
 import 'package:tiger/features/auth/presentation/widgets/uo_login_register_widget.dart';
 
-import '../../../../../core/strings/consts.dart';
+
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -36,14 +36,14 @@ class RegisterScreen extends StatelessWidget {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is LoadedRegisterState) {
-          if (state.userDataEntity.statue == 200) {
+          if (state.userDataEntity.status == 200) {
             SnackBarMessage().showSnackBar(
-                message: state.userDataEntity.massage.toString(),
+                message: state.userDataEntity.message.toString(),
                 backgroundColor: Colors.green,
                 context: context);
           } else {
             SnackBarMessage().showSnackBar(
-                message: state.userDataEntity.massage.toString(),
+                message: state.userDataEntity.message.toString(),
                 backgroundColor: Colors.redAccent,
                 context: context);
           }
@@ -106,23 +106,10 @@ class RegisterScreen extends StatelessWidget {
                                   : Icons.visibility_off)),
                           validator: (value){
                             if (value!.length < 6) {
-                              return 'Password must be more than 6 characters'.tr(context);
+                              return 'Password must be more than 8 characters'.tr(context);
                             } else if (value.length > 20) {
                               return 'Password should not be more than 20 characters'.tr(context);
-                            } else if (!RegExp(VALIDATION_UPPERCASE_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has upper case characters'.tr(context);
-                            } else if (!RegExp(VALIDATION_LOWER_CASE_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has lower case characters'.tr(context);
-                            } else if (!RegExp(VALIDATION_DIGIT_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has at least one digit'.tr(context);
-                            } else if (!RegExp(
-                                VALIDAT_SPECIAL_CHARACTER_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has special character like'.tr(context);
-                            } else {
+                            } else  {
                               return null;
                             }
 
@@ -171,7 +158,7 @@ class RegisterScreen extends StatelessWidget {
                               if (formKey.currentState!.validate()) {
                                 if (invitationCode.text == 'null') {
                                   final registerEntity = RegisterEntity(
-                                      firstName: bloc.firstName,
+                                      firstName:bloc.firstName,
                                       lastName: bloc.lastName,
                                       email: bloc.email.text.toString(),
                                       password: password.text.toString(),

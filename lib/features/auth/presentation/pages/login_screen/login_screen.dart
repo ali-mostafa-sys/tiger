@@ -34,14 +34,14 @@ class LoginScreen extends StatelessWidget {
     return BlocConsumer<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoadedLoginState) {
-          if (state.userDataEntity.statue == 200) {
+          if (state.userDataEntity.status == 200) {
             SnackBarMessage().showSnackBar(
-                message: state.userDataEntity.massage.toString(),
+                message: state.userDataEntity.message.toString(),
                 backgroundColor: Colors.green,
                 context: context);
           } else {
             SnackBarMessage().showSnackBar(
-                message: state.userDataEntity.massage.toString(),
+                message: state.userDataEntity.message.toString(),
                 backgroundColor: Colors.redAccent,
                 context: context);
           }
@@ -102,28 +102,11 @@ class LoginScreen extends StatelessWidget {
                                 : Icons.visibility_off),
                           ),
                           validator: (value) {
-                            if (value!.length < 6) {
-                              return 'Password must be more than 6 characters'
+                            if (value!.length < 8) {
+                              return 'Password must be more than 8 characters'
                                   .tr(context);
                             } else if (value.length > 20) {
                               return 'Password should not be more than 20 characters '
-                                  .tr(context);
-                            } else if (!RegExp(VALIDATION_UPPERCASE_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has upper case characters'
-                                  .tr(context);
-                            } else if (!RegExp(VALIDATION_LOWER_CASE_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has lower case characters'
-                                  .tr(context);
-                            } else if (!RegExp(VALIDATION_DIGIT_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has at least one digit'
-                                  .tr(context);
-                            } else if (!RegExp(
-                                    VALIDAT_SPECIAL_CHARACTER_PASSWORD)
-                                .hasMatch(value)) {
-                              return 'Password must has special character like'
                                   .tr(context);
                             } else {
                               return null;
@@ -137,7 +120,7 @@ class LoginScreen extends StatelessWidget {
                             text: 'LOG IN'.tr(context),
                             onTap: () {
 
-                              bool form = formKey.currentState!.validate();
+
                               if (formKey.currentState!.validate()) {
 
                                 final loginEntity = LoginEntity(
