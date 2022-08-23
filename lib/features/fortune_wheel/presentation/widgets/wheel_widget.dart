@@ -7,7 +7,14 @@ class WheelWidget extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   final selected;
   final List<int> items;
-  const WheelWidget({Key? key, required this.selected, required this.items})
+  // ignore: prefer_typing_uninitialized_variables
+  final onWheelEnd;
+
+  const WheelWidget(
+      {Key? key,
+      required this.selected,
+      required this.items,
+      required this.onWheelEnd})
       : super(key: key);
 
   @override
@@ -26,13 +33,7 @@ class WheelWidget extends StatelessWidget {
             indicators: const <FortuneIndicator>[],
             animateFirst: false,
             selected: selected.stream,
-            onAnimationEnd: () {
-              // setState(() {
-              //   reward = items[selected.value];
-              //   print(reward);
-              //   isbutton = true;
-              // });
-            },
+            onAnimationEnd: onWheelEnd,
             items: [
               for (int i = 0; i < items.length; i++) ...<FortuneItem>{
                 FortuneItem(
@@ -57,13 +58,6 @@ class WheelWidget extends StatelessWidget {
             indicators: const <FortuneIndicator>[],
             animateFirst: false,
             selected: selected.stream,
-            onAnimationEnd: () {
-              // setState(() {
-              //   reward = items[selected.value];
-              //   print(reward);
-              //   isbutton = true;
-              // });
-            },
             items: [
               for (int i = 0; i < items.length; i++) ...<FortuneItem>{
                 i % 2 == 0
@@ -85,7 +79,7 @@ class WheelWidget extends StatelessWidget {
                                       children: [
                                         // The text border
                                         Text(
-                                          '500',
+                                          items[i].toString(),
                                           style: TextStyle(
                                             fontSize: 17,
                                             letterSpacing: 1,
@@ -97,9 +91,9 @@ class WheelWidget extends StatelessWidget {
                                           ),
                                         ),
                                         // The text inside
-                                        const Text(
-                                          '500',
-                                          style: TextStyle(
+                                        Text(
+                                          items[i].toString(),
+                                          style: const TextStyle(
                                             fontSize: 17,
                                             letterSpacing: 1,
                                             fontWeight: FontWeight.bold,
@@ -131,7 +125,7 @@ class WheelWidget extends StatelessWidget {
                                     children: [
                                       // The text border
                                       Text(
-                                        '200',
+                                        items[i].toString(),
                                         style: TextStyle(
                                           fontSize: 17,
                                           letterSpacing: 1,
@@ -143,9 +137,9 @@ class WheelWidget extends StatelessWidget {
                                         ),
                                       ),
                                       // The text inside
-                                      const Text(
-                                        '200',
-                                        style: TextStyle(
+                                      Text(
+                                        items[i].toString(),
+                                        style: const TextStyle(
                                           fontSize: 17,
                                           letterSpacing: 1,
                                           fontWeight: FontWeight.bold,
@@ -173,13 +167,6 @@ class WheelWidget extends StatelessWidget {
             indicators: const <FortuneIndicator>[],
             animateFirst: false,
             selected: selected.stream,
-            onAnimationEnd: () {
-              // setState(() {
-              //   reward = items[selected.value];
-              //   print(reward);
-              //   isbutton = true;
-              // });
-            },
             items: [
               for (int i = 0; i < items.length; i++) ...<FortuneItem>{
                 i % 2 == 0
@@ -214,13 +201,6 @@ class WheelWidget extends StatelessWidget {
             indicators: const <FortuneIndicator>[],
             animateFirst: false,
             selected: selected.stream,
-            onAnimationEnd: () {
-              // setState(() {
-              //   reward = items[selected.value];
-              //   print(reward);
-              //   isbutton = true;
-              // });
-            },
             items: [
               for (int i = 0; i < items.length; i++) ...<FortuneItem>{
                 i % 2 == 0
@@ -253,8 +233,8 @@ class WheelWidget extends StatelessWidget {
           width: (w * 0.85) / 3,
           height: (w * 0.85) / 3,
           decoration: const BoxDecoration(
-              image:
-                  DecorationImage(image: AssetImage('assets/images/indecator.png'))),
+              image: DecorationImage(
+                  image: AssetImage('assets/images/indecator.png'))),
         ),
       ],
     );

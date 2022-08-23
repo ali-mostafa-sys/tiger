@@ -8,8 +8,8 @@ import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_blo
 import 'core/localizations/app_loaclizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'injection_container.dart' as di;
+// import 'package:tiger/injection2.dart' as de;
 import 'package:flutter/services.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +50,6 @@ class MyApp extends StatelessWidget {
                 deviceLocale.languageCode == locale.languageCode) {
               return deviceLocale;
             }
-          
           }
 
           return supportedLocale.first;

@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tiger/core/localizations/app_loaclizations.dart';
 
 class BubbleBar extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
@@ -62,7 +63,7 @@ class BubbleBar extends StatelessWidget {
                 children: [
                   // The text border
                   AutoSizeText(
-                    'Invite',
+                    'Invite'.tr(context),
                     style: TextStyle(
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -75,7 +76,7 @@ class BubbleBar extends StatelessWidget {
                   ),
                   // The text inside
                   AutoSizeText(
-                    'Invite',
+                    'Invite'.tr(context),
                     style: TextStyle(
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -135,7 +136,7 @@ class BubbleBar extends StatelessWidget {
                 children: [
                   // The text border
                   AutoSizeText(
-                    'Rate',
+                    'Rate'.tr(context),
                     style: TextStyle(
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -148,7 +149,7 @@ class BubbleBar extends StatelessWidget {
                   ),
                   // The text inside
                   AutoSizeText(
-                    'Rate',
+                    'Rate'.tr(context),
                     style: TextStyle(
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,

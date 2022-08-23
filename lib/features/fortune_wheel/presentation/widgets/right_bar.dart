@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tiger/core/localizations/app_loaclizations.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/rightbarwidget.dart';
 
 class RightBar extends StatelessWidget {
@@ -45,7 +46,7 @@ class RightBar extends StatelessWidget {
                 Expanded(
                     child: RightBarWidget(
                   img: 'assets/images/shop_icon.png',
-                  text: 'SHOP',
+                  text: 'SHOP'.tr(context),
                   textSize: 15,
                   tap: () {},
                 )),
@@ -57,7 +58,7 @@ class RightBar extends StatelessWidget {
                 Expanded(
                     child: RightBarWidget(
                   img: 'assets/images/upgrade_icon.png',
-                  text: 'UPGRADE',
+                  text: 'UPGRADE'.tr(context),
                   textSize: 13,
                   tap: () {},
                 )),

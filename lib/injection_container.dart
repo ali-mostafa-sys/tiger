@@ -16,6 +16,14 @@ import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_blo
 import 'package:http/http.dart' as http;
 
 import 'features/auth/presentation/bloc/login_bloc/login_bloc.dart';
+import 'features/fortune_wheel/data/data_source/wheel_local_datasource.dart';
+import 'features/fortune_wheel/data/data_source/wheel_remote_datasource.dart';
+import 'features/fortune_wheel/data/repositories/wheel_repository_imp.dart';
+import 'features/fortune_wheel/domain/repositories/wheel_repository.dart';
+import 'features/fortune_wheel/domain/use_case/get_wheel_data_usecase.dart';
+import 'features/fortune_wheel/domain/use_case/set_prize_usecase.dart';
+import 'features/fortune_wheel/presentation/bloc/ads_and_rate/ads_and_rate_bloc.dart';
+import 'features/fortune_wheel/presentation/bloc/wheel/wheel_bloc.dart';
 
 final sl=GetIt.instance;
 
@@ -34,6 +42,31 @@ Future<void>init()async{
     // dataSource
     sl.registerLazySingleton<AuthDataSource>(() => AuthDataSourceImpl(client: sl()));
     sl.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(sharedPreferences: sl()));
+
+
+
+  //2.Wheel feature
+
+  //bloc
+  sl.registerFactory(() => WheelBlocBloc(getWheelDataUseCase: sl()));
+  sl.registerFactory(() => AdsAndRateBloc());
+  // useCase
+  sl.registerLazySingleton(() => GetWheelDataUseCase(sl()));
+  sl.registerLazySingleton(() => SetPrizeUseCase(sl()));
+  // repository
+  sl.registerLazySingleton<WheelRepository>(() => WheelRepositoryImp(
+      wheelRemoteDataSource: sl(),
+      networkInfo: sl(),
+      wheelLocalDataSource: sl()));
+
+  // dataSource
+
+  sl.registerLazySingleton<WheelRemoteDataSource>(
+      () => WheelRemoteDataSourceImp(client: sl()));
+
+  sl.registerLazySingleton<WheelLocalDataSource>(
+      () => WheelLocalDataSourceImp(sharedPreferences: sl()));
+
 
 /// core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

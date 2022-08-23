@@ -39,7 +39,7 @@ class AppRouter extends _i4.RootStackRouter {
     },
     HomePageRoute.name: (routeData) {
       return _i4.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i3.WheelPage());
+          routeData: routeData, child:  _i3.WheelPage());
     }
   };
 

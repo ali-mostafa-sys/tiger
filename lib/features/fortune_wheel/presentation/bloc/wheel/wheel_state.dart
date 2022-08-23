@@ -30,3 +30,14 @@ class ErrorWheelDataState extends WheelState {
   @override
   List<Object> get props => [message];
 }
+
+class PressWheelButtonState extends WheelState {}
+
+class ShowUcValueDialogState extends WheelState {
+  final int reward;
+
+  const ShowUcValueDialogState({required this.reward});
+  @override
+  List<Object> get props => [reward];
+}
+
