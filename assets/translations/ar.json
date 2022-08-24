@@ -1,9 +1,7 @@
 {
-
   "Email": "الإيميل",
   "Email should not be empty": "لا يجب أن يكون حقل الإيميل فارغاً",
   "Pleas insert a correct Email": "الرجاء إدخال إيميل صحيح",
-
   "Password": "كلمة السر",
   "Password must be more than 8 characters": "يجب ان تكون كلمة السر أكثر من ثمانية محارف",
   "Password should not be more than 20 characters": "يجب على كلمة السر أن تكون أقل من عشريت محرف",
@@ -11,21 +9,21 @@
   "Password must has lower case characters": "يجب أن تحتوي كلمة السر على حروف صغيرة",
   "Password must has at least one digit": "يجب أن تحتوي كلمة السر على رقم واحد على الأقل",
   "Password must has special character like": "يجب أن تحتوي كلمة السر على محرف خاص على الأقل",
-
   "re_password": "إعادة كلمة السر",
   "Password is not much": "كلمة السر غير متشايهة",
-
   "Invitation Code": "كود الدعوة",
   "SIGN UP": "إنشاء حساب",
   "Already have an Account?": "لدي حساب بالفعل؟",
-
   "LOG IN": "تسجيل الدخول",
   "Do not have an Account?": "لا تملك حساب ؟",
-
-
-  "ttt": "SIGN UP"
-
-
-
-
+  "ttt": "SIGN UP",
+  "SPIN": "تدوير",
+  "SHOP": "متجر",
+  "UPGRADE": "ترقية",
+  "Invite": "دعوة",
+  "Rate": "تقييم",
+  "LogOut": "تسجيل خروج",
+  "CONGRATS": "مبروك",
+  "YOU WIN": "لقد ربحت",
+  "CONTINUE": "متابعة"
 }

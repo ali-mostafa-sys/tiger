@@ -9,3 +9,6 @@ abstract class WheelEvent extends Equatable {
 
 class GetWheelDataEvent extends WheelEvent{}
 class RefreshWheelDataEvent extends WheelEvent{}
+
+class PressWheelButtonEvent extends WheelEvent{}
+class ShowUcValueDialogEvent extends WheelEvent{}

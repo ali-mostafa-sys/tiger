@@ -10,7 +10,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'injection_container.dart' as di;
 import 'package:flutter/services.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
@@ -50,7 +49,6 @@ class MyApp extends StatelessWidget {
                 deviceLocale.languageCode == locale.languageCode) {
               return deviceLocale;
             }
-
           }
 
           return supportedLocale.first;

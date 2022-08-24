@@ -15,7 +15,7 @@ abstract class AuthDataSource {
   Future<GoogleModel> getGoogleEmail();
 }
 
-const BASE_URL = '';
+const BASE_URL = '192.168.1.3:8000';
 
 class AuthDataSourceImpl implements AuthDataSource {
   final http.Client client;
@@ -24,7 +24,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
   @override
   Future<UserDataModel> postLogin(LoginModel loginModel) async {
-    final uri = Uri.https(BASE_URL, '');
+    final uri = Uri.http(BASE_URL, '/api/unauth/user/userLogin');
     final response = await client.post(uri, body: loginModel.toJson());
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
@@ -38,10 +38,11 @@ class AuthDataSourceImpl implements AuthDataSource {
   @override
   Future<UserDataModel> postRegister(
       RegisterModel userDataRegisterModel) async {
-    final uri = Uri.https(BASE_URL, '');
+    final uri = Uri.http(BASE_URL, '/api/unauth/user/register');
     final response =
         await client.post(uri, body: userDataRegisterModel.toJson());
-    if (response.statusCode == 201) {
+    print(response.statusCode);
+    if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final userDataModel = UserDataModel.fromJson(data);
       return userDataModel;
@@ -50,6 +51,7 @@ class AuthDataSourceImpl implements AuthDataSource {
     }
   }
 
+  @override
   Future<GoogleModel> getGoogleEmail() async {
     final GoogleModel? googleModel;
     final googleSignIn = GoogleSignIn();
@@ -60,11 +62,10 @@ class AuthDataSourceImpl implements AuthDataSource {
       throw Exception('no google user');
     }
     googleModel = GoogleModel(
-        email: googleUser.email.toString(),
-        firstName: googleUser.displayName!.split(' ')[0].toString(),
-        lastName: googleUser.displayName!.split(' ')[1].toString(),
+      email: googleUser.email.toString(),
+      firstName: googleUser.displayName!.split(' ')[0].toString(),
+      lastName: googleUser.displayName!.split(' ')[1].toString(),
     );
     return googleModel;
   }
-
 }

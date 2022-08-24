@@ -1,7 +1,7 @@
 import 'package:tiger/features/auth/domain/entity/user_data_entity.dart';
 
 class TokenModel extends TokenEntity {
-  const TokenModel({required String token,required AllUserDataModel user}) : super(token: token,user: user);
+  const TokenModel({required String? token,required AllUserDataModel? user}) : super(token: token,user: user);
 
   factory TokenModel.fromJson(Map<String, dynamic> json) {
     final token = json['token'];
@@ -14,11 +14,11 @@ class TokenModel extends TokenEntity {
 }
 class AllUserDataModel extends AllDataUserEntity{
   const AllUserDataModel({
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String invitationToken,
-    required int id,
+    required String? firstName,
+    required String? lastName,
+    required String? email,
+    required String? invitationToken,
+    required int? id,
 }):super(firstName: firstName,lastName: lastName,email: email,invitationToken: invitationToken,id: id);
   factory AllUserDataModel.fromJson(Map<String,dynamic>json){
     final firstName=json['first_name'];
@@ -41,7 +41,7 @@ class UserDataModel extends UserDataEntity{
     final massage=json['message'];
     final statue=json['status'];
     final token=json['data'];
-    final tokenModel=TokenModel.fromJson(token);
+    final tokenModel=json['data']!=null? TokenModel.fromJson(json['data']):null;
 
     return UserDataModel(massage: massage, statue: statue,tokenModel: tokenModel);
   }

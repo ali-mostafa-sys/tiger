@@ -9,12 +9,12 @@ import 'package:dartz/dartz.dart';
 import 'package:tiger/features/fortune_wheel/domain/repositories/wheel_repository.dart';
 
 class WheelRepositoryImp implements WheelRepository {
-  final WheelRemoteDataSourceImp wheelRemoteDataSourceImp;
+  final WheelRemoteDataSource wheelRemoteDataSource;
   final WheelLocalDataSource wheelLocalDataSource;
   final NetworkInfo networkInfo;
 
   WheelRepositoryImp(
-      {required this.wheelRemoteDataSourceImp,
+      {required this.wheelRemoteDataSource,
       required this.networkInfo,
       required this.wheelLocalDataSource});
   ///////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ class WheelRepositoryImp implements WheelRepository {
   Future<Either<Failure, List<WheelEntity>>> getWheelData() async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteWheelData = await wheelRemoteDataSourceImp.getWheelData();
+        final remoteWheelData = await wheelRemoteDataSource.getWheelData();
 
         wheelLocalDataSource.cacheWheelData(remoteWheelData);
 
@@ -47,7 +47,7 @@ class WheelRepositoryImp implements WheelRepository {
 
     if (await networkInfo.isConnected) {
       try {
-        await wheelRemoteDataSourceImp.setPrize(wheelModel);
+        await wheelRemoteDataSource.setPrize(wheelModel);
         return const Right(unit);
       } on ServerException {
         return Left(ServerFailure());

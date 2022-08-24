@@ -1,6 +1,5 @@
 {
-
-"Email": "Email",
+  "Email": "Email",
   "Email should not be empty": "Email should not be empty",
   "Pleas insert a correct Email": "Pleas insert a correct Email",
 
@@ -11,18 +10,21 @@
   "Password must has lower case characters": "Password must has lower case characters",
   "Password must has at least one digit": "Password must has at least one digit",
   "Password must has special character like": "Password must has special character like @#$%^&*()",
-
-"re_password": "Re_Password",
+  "re_password": "Re_Password",
   "Password is not much": "Password is not much",
-
-"Invitation Code": "Invitation Code",
-"SIGN UP": "SIGN UP",
+  "Invitation Code": "Invitation Code",
+  "SIGN UP": "SIGN UP",
   "Already have an Account?": "Already have an Account?",
-
-"LOG IN": "LOG IN",
+  "LOG IN": "LOG IN",
   "Do not have an Account?": "Do not have an Account ?",
-
-
-"ttt": "SIGN UP"
-
+  "ttt": "SIGN UP",
+  "SPIN": "SPIN",
+  "SHOP": "SHOP",
+  "UPGRADE": "UPGRADE",
+  "Invite": "Invite",
+  "Rate": "Rate",
+  "LogOut": "LogOut",
+  "CONGRATS": "CONGRATS",
+  "YOU WIN": "YOU WIN",
+  "CONTINUE": "CONTINUE"
 }

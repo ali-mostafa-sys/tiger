@@ -52,9 +52,9 @@ class LoginScreen extends StatelessWidget {
       },
       builder: (context, state) {
         var bloc = LoginBloc.get(context);
-        if (state is LoadingLoginState) {
-          return const LoadingWidget();
-        }
+        // if (state is LoadingLoginState) {
+        //   return const LoadingWidget();
+        // }
         return GlowingOverscrollIndicator(
           axisDirection: AxisDirection.down,
           color: primaryColor,

@@ -41,11 +41,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoadingLoginState());
         final failureOrLogin = await loginUseCase(event.loginEntity);
 
-        failureOrLogin.fold((failure) {
+        failureOrLogin.fold((failure)async {
           emit(ErrorLoginState(error: _mapFailureToMessage(failure)));
           print('failure');
         }, (login) async {
-          TOKEN = await sharedPreferences.getString('USER_TOKEN').toString();
+          TOKEN =  sharedPreferences.getString('USER_TOKEN').toString();
           emit(LoadedLoginState(userDataEntity: login));
           print('ok');
         });
@@ -66,9 +66,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future _getEmailFunction(
       Either<Failure, GoogleEntity> failureOrGetEmail) async {
-    failureOrGetEmail.fold((failure) {
+    failureOrGetEmail.fold((failure)async {
       emit(ErrorGetEmailAndFullNameState(error: _mapFailureToMessage(failure)));
-    }, (getEmail) {
+    }, (getEmail)async {
       email.text = getEmail.email;
       print(email.text);
       emit(LoadedGetEmailAndFullNameState());

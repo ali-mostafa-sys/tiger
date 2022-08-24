@@ -15,6 +15,8 @@ import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_blo
 import 'package:tiger/features/auth/presentation/widgets/bottom_text_widget.dart';
 import 'package:tiger/features/auth/presentation/widgets/uo_login_register_widget.dart';
 
+
+
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
   TextEditingController phoneNumber = TextEditingController();
@@ -33,6 +35,7 @@ class RegisterScreen extends StatelessWidget {
   Widget _buildBody() {
     return BlocConsumer<RegisterBloc, RegisterState>(
       listener: (context, state) {
+        print(state);
         if (state is LoadedRegisterState) {
           if (state.userDataEntity.status == 200) {
             SnackBarMessage().showSnackBar(
@@ -46,18 +49,15 @@ class RegisterScreen extends StatelessWidget {
                 context: context);
           }
         }
-        if (state is ErrorRegisterState) {
-          SnackBarMessage().showSnackBar(
-              message: state.error.toString(),
-              backgroundColor: Colors.redAccent,
-              context: context);
+        if(state is ErrorRegisterState){
+          SnackBarMessage().showSnackBar(message: state.error.toString(), backgroundColor: Colors.redAccent, context: context);
         }
       },
       builder: (context, state) {
         var bloc = RegisterBloc.get(context);
-        if (state is LoadingRegisterState) {
-          return const LoadingWidget();
-        }
+        // if(state is LoadingRegisterState){
+        //   return const LoadingWidget();
+        // }
         return GlowingOverscrollIndicator(
           axisDirection: AxisDirection.down,
           color: primaryColor,
@@ -78,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                           textInputType: TextInputType.emailAddress,
                           prefixIcon: const Icon(Icons.email),
                           onTap: () {
-                            bloc.add(GetEmailAndFullNameEvent());
+                            // bloc.add(GetEmailAndFullNameEvent());
                           },
                           validator: (value) {
                             if (value.isEmpty) {
@@ -159,11 +159,14 @@ class RegisterScreen extends StatelessWidget {
                             onTap: () {
                               if (formKey.currentState!.validate()) {
                                 final registerEntity = RegisterEntity(
-                                    firstName: bloc.firstName,
-                                    lastName: bloc.lastName,
+                                    firstName: 'sss',
+                                    // bloc.firstName,
+                                    lastName: 'ssss',
+                                    // bloc.lastName,
                                     email: bloc.email.text.toString(),
                                     password: password.text,
-                                    macAddress: bloc.macAddress,
+                                    macAddress: "33-C4-c1-63-C2-43",
+                                    //  bloc.macAddress,
                                     invitationCode: invitationCode.text);
                                 bloc.add(RegisterButtonEvent(
                                     registerEntity: registerEntity));
@@ -183,7 +186,7 @@ class RegisterScreen extends StatelessWidget {
                             firstText: 'Already have an Account?'.tr(context),
                             secondText: 'LOG IN'.tr(context),
                             onTap: () {
-                              AutoRouter.of(context).pushNamed('/login');
+                              AutoRouter.of(context).pushNamed('/homePage');
                             })
                       ],
                     ),

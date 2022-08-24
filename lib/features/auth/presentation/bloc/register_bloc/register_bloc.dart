@@ -45,7 +45,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         final getMacAddress = await GetMac.macAddress;
         macAddress = getMacAddress.toString();
 
-        failureOrRegister.fold((failure) {
+        failureOrRegister.fold((failure) async{
           emit(ErrorRegisterState(error: _mapFailureToMessage(failure)));
         }, (register) async {
           TOKEN = sharedPreferences.getString('USER_TOKEN').toString();
@@ -68,9 +68,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   Future _getEmailFunction(
       Either<Failure, GoogleEntity> failureOrGetEmail) async {
-    failureOrGetEmail.fold((failure) {
+    failureOrGetEmail.fold((failure)async {
       emit(ErrorGetEmailAndFullNameState(error: _mapFailureToMessage(failure)));
-    }, (getEmail) {
+    }, (getEmail)async {
       email.text = getEmail.email;
       firstName = getEmail.firstName;
       lastName = getEmail.lastName;

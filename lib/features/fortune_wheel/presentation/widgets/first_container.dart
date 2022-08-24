@@ -30,27 +30,22 @@ class FirstContainerWidget extends StatelessWidget {
           ),
           BoxShadow(
             color: HexColor('#0B559E'),
-            spreadRadius: -1.0,
-            blurRadius: 20.0,
+            spreadRadius: -3.0,
+            blurRadius: 5.0,
           ),
         ],
         // color:
       ),
       child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AutoSizeText(
-              text,
-              maxLines: 2,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: fontSize,
-                  
-                 ),
-            ),
-          ],
+        child: AutoSizeText(
+          text,
+          maxLines: 2,
+          style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: fontSize,
+              
+             ),
         ),
       ),
     );
