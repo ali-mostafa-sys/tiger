@@ -35,9 +35,8 @@ class _RainWidgetState extends State<RainWidget> {
           width: 90,
           height: 90,
           decoration: const BoxDecoration(
-            // color: Colors.red,
               image: DecorationImage(
-                  image: AssetImage('assets/images/6.png'), fit: BoxFit.cover)),
+                  image: AssetImage('assets/images/uc_icon.png'), fit: BoxFit.cover)),
         ));
   }
 }

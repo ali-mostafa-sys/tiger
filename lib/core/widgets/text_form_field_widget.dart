@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+
 import 'package:tiger/core/app_theme.dart';
 
 class TextFormWidget extends StatelessWidget {
@@ -7,7 +7,7 @@ class TextFormWidget extends StatelessWidget {
   String labelText;
   bool obscureText;
   TextInputType textInputType;
-  Widget prefixIcon;
+  Widget? prefixIcon;
   Widget? suffixIcon;
   var validator;
   var onTap;
@@ -18,7 +18,7 @@ class TextFormWidget extends StatelessWidget {
     required this.labelText,
     required this.textInputType,
     this.obscureText = false,
-    required this.prefixIcon,
+     this.prefixIcon,
     this.suffixIcon,
     required this.validator,
     this.onTap

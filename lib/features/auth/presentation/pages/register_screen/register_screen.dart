@@ -15,8 +15,6 @@ import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_blo
 import 'package:tiger/features/auth/presentation/widgets/bottom_text_widget.dart';
 import 'package:tiger/features/auth/presentation/widgets/uo_login_register_widget.dart';
 
-
-
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
   TextEditingController phoneNumber = TextEditingController();
@@ -48,13 +46,16 @@ class RegisterScreen extends StatelessWidget {
                 context: context);
           }
         }
-        if(state is ErrorRegisterState){
-          SnackBarMessage().showSnackBar(message: state.error.toString(), backgroundColor: Colors.redAccent, context: context);
+        if (state is ErrorRegisterState) {
+          SnackBarMessage().showSnackBar(
+              message: state.error.toString(),
+              backgroundColor: Colors.redAccent,
+              context: context);
         }
       },
       builder: (context, state) {
         var bloc = RegisterBloc.get(context);
-        if(state is LoadingRegisterState){
+        if (state is LoadingRegisterState) {
           return const LoadingWidget();
         }
         return GlowingOverscrollIndicator(
@@ -104,15 +105,16 @@ class RegisterScreen extends StatelessWidget {
                               icon: Icon(bloc.obscureText
                                   ? Icons.visibility
                                   : Icons.visibility_off)),
-                          validator: (value){
+                          validator: (value) {
                             if (value!.length < 6) {
-                              return 'Password must be more than 8 characters'.tr(context);
+                              return 'Password must be more than 8 characters'
+                                  .tr(context);
                             } else if (value.length > 20) {
-                              return 'Password should not be more than 20 characters'.tr(context);
-                            } else  {
+                              return 'Password should not be more than 20 characters'
+                                  .tr(context);
+                            } else {
                               return null;
                             }
-
                           },
                         ),
                         SizedBox(
@@ -156,30 +158,22 @@ class RegisterScreen extends StatelessWidget {
                             text: 'SIGN UP'.tr(context),
                             onTap: () {
                               if (formKey.currentState!.validate()) {
-                                if (invitationCode.text == 'null') {
-                                  final registerEntity = RegisterEntity(
-                                      firstName:bloc.firstName,
-                                      lastName: bloc.lastName,
-                                      email: bloc.email.text.toString(),
-                                      password: password.text.toString(),
-                                      macAddress: bloc.macAddress);
-                                  bloc.add(RegisterButtonEvent(
-                                      registerEntity: registerEntity));
-
-                                } else {
-                                  final registerEntity = RegisterEntity(
-                                      firstName: bloc.firstName,
-                                      lastName: bloc.lastName,
-                                      email: bloc.email.text.toString(),
-                                      password: password.text,
-                                      macAddress: bloc.macAddress,
-                                      invitationCode:
-                                          invitationCode.text.toString());
-                                  bloc.add(RegisterButtonEvent(
-                                      registerEntity: registerEntity));
-
-                                }
+                                final registerEntity = RegisterEntity(
+                                    firstName: bloc.firstName,
+                                    lastName: bloc.lastName,
+                                    email: bloc.email.text.toString(),
+                                    password: password.text,
+                                    macAddress: bloc.macAddress,
+                                    invitationCode: invitationCode.text);
+                                bloc.add(RegisterButtonEvent(
+                                    registerEntity: registerEntity));
                               }
+                            }),
+                        BottomTextWidget(
+                            firstText: 'Already have an Account?'.tr(context),
+                            secondText: 'LOG IN'.tr(context),
+                            onTap: () {
+                              AutoRouter.of(context).pushNamed('/profile');
                             }),
 
                         SizedBox(

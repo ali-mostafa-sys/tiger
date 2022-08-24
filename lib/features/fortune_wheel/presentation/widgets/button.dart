@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -61,7 +62,7 @@ class CustomButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Center(
-                child: Text(
+                child: AutoSizeText(
                   text,
                   style: const TextStyle(
                       color: Colors.white,
