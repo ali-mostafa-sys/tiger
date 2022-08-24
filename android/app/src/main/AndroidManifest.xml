@@ -4,6 +4,7 @@
    <application
         android:label="tiger"
         android:name="${applicationName}"
+        android:resizeableActivity="false"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

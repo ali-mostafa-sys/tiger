@@ -52,7 +52,7 @@ class WheelPage extends StatelessWidget {
                 ),
                 /////////////////////////////////
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10, top: 0),
+                  padding: const EdgeInsets.only(bottom: 13, top: 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -74,11 +74,11 @@ class WheelPage extends StatelessWidget {
                           ),
                         ),
                       ),
-
+                  
                       SizedBox(
                         height: h * 0.02,
                       ),
-
+                  
                       /// 2
                       Expanded(
                         child: Stack(
@@ -125,9 +125,9 @@ class WheelPage extends StatelessWidget {
                                 selected: bloc.selected,
                               ),
                             ),
-
+                                        
                             ////// bubble bar
-
+                                        
                             Padding(
                               padding: EdgeInsets.only(bottom: h * 0.045),
                               child: Align(
@@ -141,7 +141,7 @@ class WheelPage extends StatelessWidget {
                                     },
                                   )),
                             ),
-
+                                        
                             //////////////////// button
                             Padding(
                               padding: EdgeInsets.only(
@@ -168,50 +168,6 @@ class WheelPage extends StatelessWidget {
                           ],
                         ),
                       ),
-
-                      // SizedBox(
-                      //   height: h * 0.01,
-                      // ),
-                      // isbutton
-                      //     ? Padding(
-                      //         padding: const EdgeInsets.symmetric(horizontal: 50),
-                      //         child: ButtonWidget(
-                      //             text: 'PLAY',
-                      //             onTap: () {
-                      //               selected
-                      //                   .add(Fortune.randomInt(0, items.length));
-                      //             },
-                      //             color: HexColor('#7F84AE'),
-                      //             high: 90),
-                      //       )
-                      //     : Padding(
-                      //         padding: const EdgeInsets.symmetric(horizontal: 50),
-                      //         child: ButtonWidget(
-                      //             text: 'PLAY',
-                      //             onTap: () {},
-                      //             color: Colors.grey,
-                      //             high: 50),
-                      //       ),
-                      // ? InkWell(
-                      //     onTap: () {
-                      //       selected.add(Fortune.randomInt(0, items.length));
-                      //       // setState(() {
-                      //       //   isbutton = false;
-                      //       // });
-                      //     },
-                      //     child: Container(
-                      //       width: 150,
-                      //       height: 50,
-                      //       color: Colors.blue,
-                      //       child: const Center(child: Text('Press the button')),
-                      //     ),
-                      //   )
-                      // : Container(
-                      //     width: 150,
-                      //     height: 50,
-                      //     color: Colors.grey,
-                      //     child: const Center(child: Text('Press the button')),
-                      //   ),
                     ],
                   ),
                 ),

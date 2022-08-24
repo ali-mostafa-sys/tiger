@@ -27,17 +27,20 @@ class AuthRepositoryImpl implements AuthRepository {
       LoginEntity loginEntity) async {
     final loginModel =
         LoginModel(email: loginEntity.email, password: loginEntity.password);
-    if (await networkInfo.isConnected) {
+   // if (await networkInfo.isConnected) {
       try {
         final authResponse = await authDataSource.postLogin(loginModel);
-        await authLocalDataSource.getToken(authResponse.data!.token.toString());
+        if(authResponse.data!=null){
+          await authLocalDataSource.getToken(authResponse.data!.token.toString());
+        }
+        
         return Right(authResponse);
       } on ServerException {
         return left(ServerFailure());
       }
-    } else {
-      return Left(OfflineFailure());
-    }
+    // } else {
+    //   return Left(OfflineFailure());
+    // }
   }
 
   @override
@@ -47,19 +50,22 @@ class AuthRepositoryImpl implements AuthRepository {
         firstName: registerEntity.firstName,
         lastName: registerEntity.lastName,
         email: registerEntity.email,
+        invitationCode: registerEntity.invitationCode,
         password: registerEntity.password,
         macAddress: registerEntity.macAddress);
-    if (await networkInfo.isConnected) {
+   // if (await networkInfo.isConnected) {
       try {
         final authResponse = await authDataSource.postRegister(registerModel);
-        await authLocalDataSource.getToken(authResponse.data!.token.toString());
+        if(authResponse.data!=null){
+          await authLocalDataSource.getToken(authResponse.data!.token.toString());
+        }
         return Right(authResponse);
       } on ServerException {
         return left(ServerFailure());
       }
-    } else {
-      return Left(OfflineFailure());
-    }
+    // } else {
+    //   return Left(OfflineFailure());
+    // }
 
 
   }

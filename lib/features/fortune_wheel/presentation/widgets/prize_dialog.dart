@@ -60,7 +60,7 @@ class PrizeDialogWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: w * 0.23),
             child: FirstContainerWidget(
-                text: reward.toString(), fontSize: 20, width: 0),
+                text: reward.toString(), fontSize: 20, width: double.infinity),
           ),
           ///////////////
           SizedBox(
@@ -83,18 +83,6 @@ class PrizeDialogWidget extends StatelessWidget {
             ),
           )
         ],
-        // actions: [
-        //   TextButton(
-        //     onPressed: () {
-        //       Navigator.of(context).pop();
-        //     },
-        //     child: const Text('No'),
-        //   ),
-        //   TextButton(
-        //     onPressed: () {},
-        //     child: const Text('Yes'),
-        //   )
-        // ],
       ),
     );
   }

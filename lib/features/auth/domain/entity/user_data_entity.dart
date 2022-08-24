@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
 class TokenEntity extends Equatable{
-  final String token;
-  final AllDataUserEntity user;
+  final String? token;
+  final AllDataUserEntity? user;
 
- const TokenEntity({required this.token,required this.user});
+ const TokenEntity({ this.token, this.user});
 
 
 
@@ -15,20 +15,20 @@ class TokenEntity extends Equatable{
 }
 
 class AllDataUserEntity extends Equatable{
-final String firstName;
-final String lastName;
-final String email;
-final String invitationToken;
-final int id;
+final String? firstName;
+final String? lastName;
+final String? email;
+final String? invitationToken;
+final int? id;
 
 // final int points;
 // final int rollCount;
 const AllDataUserEntity({
-  required this.firstName,
-  required this.lastName,
-  required this.email,
-  required this.invitationToken,
-  required this.id,
+   this.firstName,
+   this.lastName,
+   this.email,
+   this.invitationToken,
+   this.id,
   // required this.points,
   // required this.rollCount,
 });
@@ -46,7 +46,7 @@ class UserDataEntity extends Equatable{
   const UserDataEntity({required this.message,required this.status,this.data});
   @override
   // TODO: implement props
-  List<Object?> get props => [message,status,data];
+  List<Object?> get props => [message,status,data!];
 }
 
 
