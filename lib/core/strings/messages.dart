@@ -1,1 +1,1 @@
-const LOGIN_SUCCESS_MESSAGE='Login Successfully';
+const LOGIN_SUCCESS_MESSAGE = 'Login Successfully';

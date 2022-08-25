@@ -50,7 +50,7 @@ class AppRouter extends _i6.RootStackRouter {
     },
     ProfileRoute.name: (routeData) {
       return _i6.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i5.ProfilePage());
+          routeData: routeData, child: _i5.ProfilePage());
     }
   };
 

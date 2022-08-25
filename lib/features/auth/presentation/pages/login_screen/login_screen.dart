@@ -39,6 +39,10 @@ class LoginScreen extends StatelessWidget {
                 message: state.userDataEntity.message.toString(),
                 backgroundColor: Colors.green,
                 context: context);
+
+            /// here you can send data
+            AutoRouter.of(context)
+                .pushAndPopUntil(HomePageRoute(), predicate: (route) => false);
           } else {
             SnackBarMessage().showSnackBar(
                 message: state.userDataEntity.message.toString(),
@@ -46,15 +50,18 @@ class LoginScreen extends StatelessWidget {
                 context: context);
           }
         }
-        if(state is ErrorLoginState){
-          SnackBarMessage().showSnackBar(message: state.error.toString(), backgroundColor: Colors.redAccent, context: context);
+        if (state is ErrorLoginState) {
+          SnackBarMessage().showSnackBar(
+              message: state.error.toString(),
+              backgroundColor: Colors.redAccent,
+              context: context);
         }
       },
       builder: (context, state) {
         var bloc = LoginBloc.get(context);
-        // if (state is LoadingLoginState) {
-        //   return const LoadingWidget();
-        // }
+        if (state is LoadingLoginState) {
+          return const LoadingWidget();
+        }
         return GlowingOverscrollIndicator(
           axisDirection: AxisDirection.down,
           color: primaryColor,
@@ -119,17 +126,12 @@ class LoginScreen extends StatelessWidget {
                         ButtonWidget(
                             text: 'LOG IN'.tr(context),
                             onTap: () {
-
-
                               if (formKey.currentState!.validate()) {
-
                                 final loginEntity = LoginEntity(
                                     email: bloc.email.text.toString(),
                                     password: password.text.toString());
-                                bloc
-                                  .add(LoginButtonEvent(
-                                      loginEntity: loginEntity));
-
+                                bloc.add(
+                                    LoginButtonEvent(loginEntity: loginEntity));
                               }
                             }),
                         SizedBox(
@@ -147,9 +149,7 @@ class LoginScreen extends StatelessWidget {
                             firstText: 'Do not have an Account?'.tr(context),
                             secondText: 'SIGN UP'.tr(context),
                             onTap: () {
-                              AutoRouter.of(context).pushAndPopUntil(
-                                  RegisterRoute(),
-                                  predicate: (route) => false);
+                              AutoRouter.of(context).pushNamed('/register');
                             })
                       ],
                     ),

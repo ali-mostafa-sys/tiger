@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
+
 import 'package:tiger/core/app_theme.dart';
 
 class TextFormWidget extends StatelessWidget {
@@ -7,22 +7,22 @@ class TextFormWidget extends StatelessWidget {
   String labelText;
   bool obscureText;
   TextInputType textInputType;
-  Widget prefixIcon;
+  Widget? prefixIcon;
   Widget? suffixIcon;
   var validator;
   var onTap;
 
-  TextFormWidget({
-    Key? key,
-    required this.controller,
-    required this.labelText,
-    required this.textInputType,
-    this.obscureText = false,
-    required this.prefixIcon,
-    this.suffixIcon,
-    required this.validator,
-    this.onTap
-  }) : super(key: key);
+  TextFormWidget(
+      {Key? key,
+      required this.controller,
+      required this.labelText,
+      required this.textInputType,
+      this.obscureText = false,
+      this.prefixIcon,
+      this.suffixIcon,
+      required this.validator,
+      this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

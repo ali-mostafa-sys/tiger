@@ -32,23 +32,24 @@ class ErrorLoginState extends LoginState {
   List<Object> get props => [error];
 }
 
-class ObscureTextState extends LoginState{
+class ObscureTextState extends LoginState {
   final bool obscureText;
+
   const ObscureTextState({required this.obscureText});
+
   @override
-  List<Object> get props=>[obscureText];
+  List<Object> get props => [obscureText];
 }
 
-class LoadingGetEmailAndFullNameState extends LoginState{
-}
+class LoadingGetEmailAndFullNameState extends LoginState {}
 
-class LoadedGetEmailAndFullNameState extends LoginState{
+class LoadedGetEmailAndFullNameState extends LoginState {}
 
-}
-
-class ErrorGetEmailAndFullNameState extends LoginState{
+class ErrorGetEmailAndFullNameState extends LoginState {
   final String error;
+
   const ErrorGetEmailAndFullNameState({required this.error});
+
   @override
   List<Object> get props => [error];
 }

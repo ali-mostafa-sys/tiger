@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tiger/core/localizations/app_loaclizations.dart';
+
 import 'package:tiger/features/fortune_wheel/presentation/widgets/bubble_bar.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/button.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/first_container.dart';
@@ -13,7 +14,9 @@ import 'package:tiger/features/fortune_wheel/presentation/widgets/wheel_widget.d
 import '../bloc/wheel/wheel_bloc.dart';
 
 class WheelPage extends StatelessWidget {
-  const WheelPage({Key? key}) : super(key: key);
+  const WheelPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

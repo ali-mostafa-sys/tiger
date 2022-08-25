@@ -12,6 +12,7 @@ abstract class AuthDataSource {
   Future<UserDataModel> postRegister(RegisterModel registerModel);
 
   Future<UserDataModel> postLogin(LoginModel loginModel);
+
   Future<GoogleModel> getGoogleEmail();
 }
 
