@@ -37,7 +37,7 @@ class RightBarWidget extends StatelessWidget {
                     image: AssetImage(img), fit: BoxFit.contain)),
           ),
           ////////////////////////
-          Container(
+          SizedBox(
             // color: Colors.red,
             width: (w / 4)-20,
             height:(h / 4) - 120 ,

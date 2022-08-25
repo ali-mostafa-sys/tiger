@@ -26,5 +26,9 @@
   "LogOut": "LogOut",
   "CONGRATS": "CONGRATS",
   "YOU WIN": "YOU WIN",
-  "CONTINUE": "CONTINUE"
+  "CONTINUE": "CONTINUE",
+
+  "OrderValue": "Order Value",
+  "Cancel": "Cancel",
+  "Order": "Order"
 }

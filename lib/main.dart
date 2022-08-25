@@ -7,6 +7,7 @@ import 'package:tiger/features/auth/presentation/bloc/login_bloc/login_bloc.dart
 import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_bloc.dart';
 import 'core/localizations/app_loaclizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'features/fortune_wheel/presentation/bloc/wheel/wheel_bloc.dart';
 import 'injection_container.dart' as di;
 import 'package:flutter/services.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => di.sl<LoginBloc>()),
         BlocProvider(create: (_) => di.sl<RegisterBloc>()),
+        BlocProvider(create: (context) => di.sl<WheelBlocBloc>(),),
       ],
       child: MaterialApp.router(
         supportedLocales: const [Locale('en'), Locale('ar')],

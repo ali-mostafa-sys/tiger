@@ -8,9 +8,8 @@ import 'package:tiger/features/fortune_wheel/presentation/widgets/button.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/first_container.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/prize_dialog.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/right_bar.dart';
+import 'package:tiger/features/fortune_wheel/presentation/widgets/shop_dialog.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/wheel_widget.dart';
-import 'package:tiger/injection_container.dart' as de;
-
 import '../bloc/wheel/wheel_bloc.dart';
 
 class WheelPage extends StatelessWidget {
@@ -21,161 +20,174 @@ class WheelPage extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
 
-    return BlocProvider(
-      create: (context) => de.sl<WheelBlocBloc>(),
-      child: SafeArea(
-        child: Scaffold(
-            //////
-            body: BlocConsumer<WheelBlocBloc, WheelState>(
-          listener: (context, state) {
-            if(state is ShowUcValueDialogState){
-              showDialog(context: context, builder: (BuildContext context){
-                return PrizeDialogWidget(reward: state.reward,);
-              });
-            }
-          },
-          builder: (context, state) {
-            var bloc = WheelBlocBloc.get(context);
-            return Stack(
-              alignment: Alignment.center,
-              children: [
-                //// background
-                Container(
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/home_page.png'),
-                          fit: BoxFit.cover)),
-                ),
-                ////// opacity container
-                Container(
-                  color: Colors.black.withOpacity(0.3),
-                ),
-                /////////////////////////////////
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 13, top: 0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ///////1
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 2),
-                        child: Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              //1
-                              ucValueItem(w),
-                              //2
-                              logOutItem(w,context),
-                              //3
-                              profileItem(w),
-                            ],
-                          ),
-                        ),
-                      ),
-                  
-                      SizedBox(
-                        height: h * 0.02,
-                      ),
-                  
-                      /// 2
-                      Expanded(
-                        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+          //////
+          body: BlocConsumer<WheelBlocBloc, WheelState>(
+        listener: (context, state) {
+          print(state);
+          if (state is ShowUcValueDialogState) {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return PrizeDialogWidget(
+                    reward: state.reward,
+                  );
+                });
+          }
+          if (state is ShowShopDialogState) {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return ShopDialogWidget();
+                });
+          }
+        },
+        builder: (context, state) {
+          var bloc = WheelBlocBloc.get(context);
+          return Stack(
+            alignment: Alignment.center,
+            children: [
+              //// background
+              Container(
+                decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/home_page.png'),
+                        fit: BoxFit.cover)),
+              ),
+              ////// opacity container
+              Container(
+                color: Colors.black.withOpacity(0.3),
+              ),
+              /////////////////////////////////
+              Padding(
+                padding: const EdgeInsets.only(bottom: 13, top: 0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ///////1
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      child: Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            //right bar
-                            const Align(
-                              alignment: Alignment.topRight,
-                              child: RightBar(),
-                            ),
-                            ////////////// home
-                            Positioned(
-                              top: (h / 2 - 75) - (h * 0.02) - w * 0.85 / 1.6,
-                              left: w < h
-                                  ? w / 2 - ((w * 0.85 / 4))
-                                  : w / 2 - ((h * 0.5 / 4)),
-                              child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/7.png',
-                                    fit: BoxFit.cover,
-                                    width: w < h ? w * 0.85 / 2 : h * 0.5 / 2,
-                                  ),
-                                  Positioned(
-                                      left: w < h
-                                          ? w / 2 - ((w * 0.85 / 3.1))
-                                          : w / 2 - ((h * 0.5 / 3.1)),
-                                      child: const AutoSizeText(
-                                        '20',
-                                        style: TextStyle(color: Colors.white),
-                                      )),
-                                ],
-                              ),
-                            ),
-                            ///////// wheel
-                            Align(
-                              alignment: Alignment.center,
-                              child: WheelWidget(
-                                onWheelEnd: () {
-                                  print('wheel end');
-                                  bloc.add(ShowUcValueDialogEvent());
-                                },
-                                items: bloc.items,
-                                selected: bloc.selected,
-                              ),
-                            ),
-                                        
-                            ////// bubble bar
-                                        
-                            Padding(
-                              padding: EdgeInsets.only(bottom: h * 0.045),
-                              child: Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: BubbleBar(
-                                    firstTap: () {
-                                      print('1');
-                                    },
-                                    secondTap: () {
-                                      print('2');
-                                    },
-                                  )),
-                            ),
-                                        
-                            //////////////////// button
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: w * 0.26,
-                                  right: w * 0.26,
-                                  bottom: h * 0.005),
-                              child: Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: CustomButton(
-                                    hexaColor1: bloc.buttonColor1,
-                                    hexaColor2: bloc.buttonColor2,
-                                    text: 'SPIN'.tr(context),
-                                    h1: h / 8,
-                                    h2: h / 9.5,
-                                    tap: () {
-                                      if (bloc.isPressed == false) {
-                                        bloc.add(PressWheelButtonEvent());
-                                      } else {
-                                        print('you cant');
-                                      }
-                                    },
-                                  )),
-                            ),
+                            //1
+                            ucValueItem(w),
+                            //2
+                            logOutItem(w, context),
+                            //3
+                            profileItem(w),
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+
+                    SizedBox(
+                      height: h * 0.02,
+                    ),
+
+                    /// 2
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          //right bar
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: RightBar(tap1: () {
+                              bloc.add(ShowShopDialogEvent());
+                            }, tap2: () {
+                              print('xxx');
+                            }),
+                          ),
+                          ////////////// home
+                          Positioned(
+                            top: (h / 2 - 75) - (h * 0.02) - w * 0.85 / 1.6,
+                            left: w < h
+                                ? w / 2 - ((w * 0.85 / 4))
+                                : w / 2 - ((h * 0.5 / 4)),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/7.png',
+                                  fit: BoxFit.cover,
+                                  width: w < h ? w * 0.85 / 2 : h * 0.5 / 2,
+                                ),
+                                Positioned(
+                                    left: w < h
+                                        ? w / 2 - ((w * 0.85 / 3.1))
+                                        : w / 2 - ((h * 0.5 / 3.1)),
+                                    child: const AutoSizeText(
+                                      '20',
+                                      style: TextStyle(color: Colors.white),
+                                    )),
+                              ],
+                            ),
+                          ),
+                          ///////// wheel
+                          Align(
+                            alignment: Alignment.center,
+                            child: WheelWidget(
+                              onWheelEnd: () {
+                                print('wheel end');
+                                bloc.add(ShowUcValueDialogEvent());
+                              },
+                              items: bloc.wheelItems,
+                              selected: bloc.selected,
+                            ),
+                          ),
+
+                          ////// bubble bar
+
+                          Padding(
+                            padding: EdgeInsets.only(bottom: h * 0.045),
+                            child: Align(
+                                alignment: Alignment.bottomRight,
+                                child: BubbleBar(
+                                  firstTap: () {
+                                    print('1');
+                                  },
+                                  secondTap: () {
+                                    print('2');
+                                  },
+                                )),
+                          ),
+
+                          //////////////////// button
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: w * 0.26,
+                                right: w * 0.26,
+                                bottom: h * 0.005),
+                            child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: CustomButton(
+                                  hexaColor1: bloc.buttonColor1,
+                                  hexaColor2: bloc.buttonColor2,
+                                  text: 'SPIN'.tr(context),
+                                  h1: h / 8,
+                                  h2: h / 9.5,
+                                  tap: () {
+                                    if (bloc.isPressed == false) {
+                                      bloc.add(PressWheelButtonEvent());
+                                    } else {
+                                      print('you cant');
+                                    }
+                                  },
+                                )),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            );
-          },
-        )),
-      ),
+              ),
+            ],
+          );
+        },
+      )),
     );
   }
 

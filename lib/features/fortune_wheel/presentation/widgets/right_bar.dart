@@ -4,7 +4,10 @@ import 'package:tiger/core/localizations/app_loaclizations.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/rightbarwidget.dart';
 
 class RightBar extends StatelessWidget {
-  const RightBar({Key? key}) : super(key: key);
+  final tap1;
+  final tap2;
+
+  const RightBar({Key? key,required this.tap1,required this.tap2}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +51,7 @@ class RightBar extends StatelessWidget {
                   img: 'assets/images/shop_icon.png',
                   text: 'SHOP'.tr(context),
                   textSize: 15,
-                  tap: () {},
+                  tap: tap1,
                 )),
                 /////
                 SizedBox(
@@ -60,7 +63,7 @@ class RightBar extends StatelessWidget {
                   img: 'assets/images/upgrade_icon.png',
                   text: 'UPGRADE'.tr(context),
                   textSize: 13,
-                  tap: () {},
+                  tap: tap2,
                 )),
               ],
             ),

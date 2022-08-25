@@ -25,5 +25,9 @@
   "LogOut": "تسجيل خروج",
   "CONGRATS": "مبروك",
   "YOU WIN": "لقد ربحت",
-  "CONTINUE": "متابعة"
+  "CONTINUE": "متابعة",
+
+  "OrderValue": "قيمة الطلب",
+  "Cancel": "رجوع",
+  "Order": "طلب"
 }

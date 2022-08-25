@@ -31,13 +31,31 @@ class ErrorWheelDataState extends WheelState {
   List<Object> get props => [message];
 }
 
+//////////////////////////////////////////////////
 class PressWheelButtonState extends WheelState {}
 
 class ShowUcValueDialogState extends WheelState {
   final int reward;
-
   const ShowUcValueDialogState({required this.reward});
   @override
   List<Object> get props => [reward];
 }
 
+/////////////////////////////////////////////////
+
+class ShowShopDialogState extends WheelState {
+  final bool isState;
+
+  const ShowShopDialogState(this.isState);
+  @override
+  List<Object> get props => [isState];
+}
+
+///////////////////////////////////////////////////
+class PickShopItemState extends WheelState {
+  final bool isState;
+
+  const PickShopItemState(this.isState);
+  @override
+  List<Object> get props => [isState];
+}
