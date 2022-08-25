@@ -31,23 +31,25 @@ class ErrorRegisterState extends RegisterState {
   @override
   List<Object> get props => [error];
 }
-class ObscureTextState extends RegisterState{
+
+class ObscureTextState extends RegisterState {
   final bool obscureText;
+
   const ObscureTextState({required this.obscureText});
+
   @override
   List<Object> get props => [obscureText];
 }
 
-class LoadingGetEmailAndFullNameState extends RegisterState{
-}
+class LoadingGetEmailAndFullNameState extends RegisterState {}
 
-class LoadedGetEmailAndFullNameState extends RegisterState{
+class LoadedGetEmailAndFullNameState extends RegisterState {}
 
-}
+class ErrorGetEmailAndFullNameState extends RegisterState {
+  final String error;
 
-class ErrorGetEmailAndFullNameState extends RegisterState{
- final String error;
   const ErrorGetEmailAndFullNameState({required this.error});
- @override
- List<Object> get props => [error];
+
+  @override
+  List<Object> get props => [error];
 }

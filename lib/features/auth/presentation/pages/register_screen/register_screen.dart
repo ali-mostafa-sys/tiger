@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tiger/core/app_theme.dart';
 
 import 'package:tiger/core/localizations/app_loaclizations.dart';
+import 'package:tiger/core/routes/routes.gr.dart';
 import 'package:tiger/core/utils/snachbar_message.dart';
 import 'package:tiger/core/widgets/button_widget.dart';
 import 'package:tiger/core/widgets/loading_widget.dart';
@@ -14,8 +15,6 @@ import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_blo
 
 import 'package:tiger/features/auth/presentation/widgets/bottom_text_widget.dart';
 import 'package:tiger/features/auth/presentation/widgets/uo_login_register_widget.dart';
-
-
 
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -42,6 +41,10 @@ class RegisterScreen extends StatelessWidget {
                 message: state.userDataEntity.message.toString(),
                 backgroundColor: Colors.green,
                 context: context);
+
+            /// here you can send data
+            AutoRouter.of(context)
+                .pushAndPopUntil(HomePageRoute(), predicate: (route) => false);
           } else {
             SnackBarMessage().showSnackBar(
                 message: state.userDataEntity.message.toString(),
@@ -49,15 +52,18 @@ class RegisterScreen extends StatelessWidget {
                 context: context);
           }
         }
-        if(state is ErrorRegisterState){
-          SnackBarMessage().showSnackBar(message: state.error.toString(), backgroundColor: Colors.redAccent, context: context);
+        if (state is ErrorRegisterState) {
+          SnackBarMessage().showSnackBar(
+              message: state.error.toString(),
+              backgroundColor: Colors.redAccent,
+              context: context);
         }
       },
       builder: (context, state) {
         var bloc = RegisterBloc.get(context);
-        // if(state is LoadingRegisterState){
-        //   return const LoadingWidget();
-        // }
+        if (state is LoadingRegisterState) {
+          return const LoadingWidget();
+        }
         return GlowingOverscrollIndicator(
           axisDirection: AxisDirection.down,
           color: primaryColor,
@@ -78,6 +84,7 @@ class RegisterScreen extends StatelessWidget {
                           textInputType: TextInputType.emailAddress,
                           prefixIcon: const Icon(Icons.email),
                           onTap: () {
+                            //TODO: UN COMMIT THIS
                             // bloc.add(GetEmailAndFullNameEvent());
                           },
                           validator: (value) {
@@ -158,6 +165,7 @@ class RegisterScreen extends StatelessWidget {
                             text: 'SIGN UP'.tr(context),
                             onTap: () {
                               if (formKey.currentState!.validate()) {
+                                //TODO: MAKE IT RIGHT
                                 final registerEntity = RegisterEntity(
                                     firstName: 'sss',
                                     // bloc.firstName,
@@ -165,20 +173,13 @@ class RegisterScreen extends StatelessWidget {
                                     // bloc.lastName,
                                     email: bloc.email.text.toString(),
                                     password: password.text,
-                                    macAddress: "33-C4-c1-63-C2-43",
+                                    macAddress: "33-C4-c1-63-C2-47",
                                     //  bloc.macAddress,
                                     invitationCode: invitationCode.text);
                                 bloc.add(RegisterButtonEvent(
                                     registerEntity: registerEntity));
                               }
                             }),
-                        BottomTextWidget(
-                            firstText: 'Already have an Account?'.tr(context),
-                            secondText: 'LOG IN'.tr(context),
-                            onTap: () {
-                              AutoRouter.of(context).pushNamed('/profile');
-                            }),
-
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.01,
                         ),
@@ -186,7 +187,7 @@ class RegisterScreen extends StatelessWidget {
                             firstText: 'Already have an Account?'.tr(context),
                             secondText: 'LOG IN'.tr(context),
                             onTap: () {
-                              AutoRouter.of(context).pushNamed('/homePage');
+                              AutoRouter.of(context).pushNamed('/login');
                             })
                       ],
                     ),

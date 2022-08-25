@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:tiger/core/app_theme.dart';
 
@@ -13,10 +12,11 @@ class LoadingWidget extends StatelessWidget {
         child: SizedBox(
           height: 30,
           width: 30,
-          child: CircularProgressIndicator(color: primaryColor,),
+          child: CircularProgressIndicator(
+            color: primaryColor,
+          ),
         ),
       ),
-
     );
   }
 }

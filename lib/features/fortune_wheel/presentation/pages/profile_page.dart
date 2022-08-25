@@ -106,7 +106,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   Padding(
                     padding:  const EdgeInsets.symmetric(horizontal: 40),
-                    child: CustomButton(
+                    child: CustomButton(hexaColor1: '#6B5A7E',hexaColor2: '#5A4D68',
                       text: "Update",
                         h1: h*0.09,
                         h2:  h*0.08,

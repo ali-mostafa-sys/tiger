@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tiger/core/localizations/app_loaclizations.dart';
+
 import 'package:tiger/features/fortune_wheel/presentation/widgets/bubble_bar.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/button.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/first_container.dart';
@@ -14,7 +15,9 @@ import 'package:tiger/injection_container.dart' as de;
 import '../bloc/wheel/wheel_bloc.dart';
 
 class WheelPage extends StatelessWidget {
-  const WheelPage({Key? key}) : super(key: key);
+  const WheelPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +31,14 @@ class WheelPage extends StatelessWidget {
             //////
             body: BlocConsumer<WheelBlocBloc, WheelState>(
           listener: (context, state) {
-            if(state is ShowUcValueDialogState){
-              showDialog(context: context, builder: (BuildContext context){
-                return PrizeDialogWidget(reward: state.reward,);
-              });
+            if (state is ShowUcValueDialogState) {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return PrizeDialogWidget(
+                      reward: state.reward,
+                    );
+                  });
             }
           },
           builder: (context, state) {
@@ -67,18 +74,18 @@ class WheelPage extends StatelessWidget {
                               //1
                               ucValueItem(w),
                               //2
-                              logOutItem(w,context),
+                              logOutItem(w, context),
                               //3
                               profileItem(w),
                             ],
                           ),
                         ),
                       ),
-                  
+
                       SizedBox(
                         height: h * 0.02,
                       ),
-                  
+
                       /// 2
                       Expanded(
                         child: Stack(
@@ -125,9 +132,9 @@ class WheelPage extends StatelessWidget {
                                 selected: bloc.selected,
                               ),
                             ),
-                                        
+
                             ////// bubble bar
-                                        
+
                             Padding(
                               padding: EdgeInsets.only(bottom: h * 0.045),
                               child: Align(
@@ -141,7 +148,7 @@ class WheelPage extends StatelessWidget {
                                     },
                                   )),
                             ),
-                                        
+
                             //////////////////// button
                             Padding(
                               padding: EdgeInsets.only(

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,13 +40,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoadingLoginState());
         final failureOrLogin = await loginUseCase(event.loginEntity);
 
-        failureOrLogin.fold((failure)async {
+        failureOrLogin.fold((failure) async {
           emit(ErrorLoginState(error: _mapFailureToMessage(failure)));
-          print('failure');
         }, (login) async {
-          TOKEN =  sharedPreferences.getString('USER_TOKEN').toString();
+          TOKEN = sharedPreferences.getString('USER_TOKEN').toString();
+          invitationCode =
+              sharedPreferences.getString('INVITATION_CODE').toString();
           emit(LoadedLoginState(userDataEntity: login));
-          print('ok');
         });
       }
       if (event is ObscureTextEvent) {
@@ -66,9 +65,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future _getEmailFunction(
       Either<Failure, GoogleEntity> failureOrGetEmail) async {
-    failureOrGetEmail.fold((failure)async {
+    failureOrGetEmail.fold((failure) async {
       emit(ErrorGetEmailAndFullNameState(error: _mapFailureToMessage(failure)));
-    }, (getEmail)async {
+    }, (getEmail) async {
       email.text = getEmail.email;
       print(email.text);
       emit(LoadedGetEmailAndFullNameState());

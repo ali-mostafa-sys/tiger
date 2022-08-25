@@ -5,13 +5,12 @@ class GoogleEntity extends Equatable {
   final String firstName;
   final String lastName;
 
- const GoogleEntity({
+  const GoogleEntity({
     required this.email,
     required this.firstName,
     required this.lastName,
   });
 
   @override
-
-  List<Object?> get props => [email,firstName,lastName];
+  List<Object?> get props => [email, firstName, lastName];
 }

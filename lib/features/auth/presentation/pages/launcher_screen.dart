@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-
+import 'package:tiger/core/strings/consts.dart';
 
 import '../../../../core/routes/routes.gr.dart';
 import '../widgets/money_animation_widget.dart';
@@ -20,9 +20,15 @@ class _LauncherScreenState extends State<LauncherScreen> {
     super.initState();
     _display = true;
     Future.delayed(const Duration(seconds: 11, milliseconds: 500), () {
-      print('One second has passed.');
-      AutoRouter.of(context).pushAndPopUntil(LoginRoute(),
-          predicate: (route) => false); // Prints after 1 second.
+      if (TOKEN == '') {
+        AutoRouter.of(context)
+            .pushAndPopUntil(LoginRoute(), predicate: (route) => false);
+      } else {
+        AutoRouter.of(context).pushAndPopUntil(const HomePageRoute(),
+            predicate: (route) => false);
+      }
+
+      // Prints after 1 second.
     });
   }
 

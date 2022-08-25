@@ -6,6 +6,4 @@ class GoogleModel extends GoogleEntity {
       required String firstName,
       required String lastName})
       : super(email: email, firstName: firstName, lastName: lastName);
-
-
 }

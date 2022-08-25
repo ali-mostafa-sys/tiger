@@ -9,8 +9,7 @@ import '../../features/fortune_wheel/presentation/pages/wheel_page.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
-     AutoRoute(path: '/', page: LauncherScreen, initial: true),
-    
+    AutoRoute(path: '/', page: LauncherScreen, initial: true),
     AutoRoute(
       path: '/login',
       page: LoginScreen,
@@ -22,10 +21,10 @@ import '../../features/fortune_wheel/presentation/pages/wheel_page.dart';
       name: 'RegisterRoute',
     ),
     AutoRoute(
-        path: '/homePage',
-        name: 'homePageRoute',
-        page: WheelPage,
-        ),
+      path: '/homePage',
+      name: 'homePageRoute',
+      page: WheelPage,
+    ),
     AutoRoute(
       path: '/profile',
       name: 'ProfileRoute',

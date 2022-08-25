@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +44,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         final getMacAddress = await GetMac.macAddress;
         macAddress = getMacAddress.toString();
 
-        failureOrRegister.fold((failure) async{
+        failureOrRegister.fold((failure) async {
           emit(ErrorRegisterState(error: _mapFailureToMessage(failure)));
         }, (register) async {
           TOKEN = sharedPreferences.getString('USER_TOKEN').toString();
+          invitationCode =
+              sharedPreferences.getString('INVITATION_CODE').toString();
           emit(LoadedRegisterState(userDataEntity: register));
         });
       }
@@ -59,7 +60,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       if (event is GetEmailAndFullNameEvent) {
         emit(LoadingGetEmailAndFullNameState());
         final failureOrGetEmail = await googleUseCase();
-        _getEmailFunction(failureOrGetEmail).then((value)async {
+        _getEmailFunction(failureOrGetEmail).then((value) async {
           await _googleSignIn.disconnect();
         });
       }
@@ -68,9 +69,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   Future _getEmailFunction(
       Either<Failure, GoogleEntity> failureOrGetEmail) async {
-    failureOrGetEmail.fold((failure)async {
+    failureOrGetEmail.fold((failure) async {
       emit(ErrorGetEmailAndFullNameState(error: _mapFailureToMessage(failure)));
-    }, (getEmail)async {
+    }, (getEmail) async {
       email.text = getEmail.email;
       firstName = getEmail.firstName;
       lastName = getEmail.lastName;
