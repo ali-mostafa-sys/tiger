@@ -20,7 +20,7 @@ class _LauncherScreenState extends State<LauncherScreen> {
     super.initState();
     _display = true;
     Future.delayed(const Duration(seconds: 11, milliseconds: 500), () {
-      if (TOKEN == '') {
+      if (TOKEN == null) {
         AutoRouter.of(context)
             .pushAndPopUntil(LoginRoute(), predicate: (route) => false);
       } else {

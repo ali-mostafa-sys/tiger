@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiger/core/app_theme.dart';
 import 'package:tiger/core/routes/routes.gr.dart';
+import 'package:tiger/core/strings/consts.dart';
 import 'package:tiger/features/auth/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_bloc.dart';
 import 'core/localizations/app_loaclizations.dart';
@@ -14,6 +16,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   await di.init();
+  SharedPreferences sh = di.sl();
+  TOKEN = sh.getString('USER_TOKEN');
+  invitationCode = sh.getString('INVITATION_CODE');
+
   runApp(MyApp());
 }
 

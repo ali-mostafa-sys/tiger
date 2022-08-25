@@ -1,5 +1,5 @@
-String? TOKEN = '';
-String? invitationCode = '';
+String? TOKEN ;
+String? invitationCode ;
 
 const String VALIDATION_EMAIL =
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
