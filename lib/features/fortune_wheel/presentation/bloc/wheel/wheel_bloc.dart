@@ -25,7 +25,7 @@ class WheelBlocBloc extends Bloc<WheelEvent, WheelState> {
 
   int shopValue = 0;
 
-  List<int> shopItems = [50, 100, 200, 300, 400, 500];
+  List<int> shopItems = [300, 600, 1500, 3000, 6000, 13200];
 
   String buttonColor1 = '#6B5A7E';
   String buttonColor2 = '#5A4D68';
