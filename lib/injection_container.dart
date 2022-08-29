@@ -14,6 +14,7 @@ import 'package:tiger/features/auth/domain/use_case/login_use_case.dart';
 import 'package:tiger/features/auth/domain/use_case/register_use_case.dart';
 import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:tiger/features/fortune_wheel/domain/use_case/get_user_info_usecaase.dart';
 
 import 'features/auth/presentation/bloc/login_bloc/login_bloc.dart';
 import 'features/fortune_wheel/data/data_source/wheel_local_datasource.dart';
@@ -48,10 +49,11 @@ Future<void>init()async{
   //2.Wheel feature
 
   //bloc
-  sl.registerFactory(() => WheelBlocBloc(getWheelDataUseCase: sl()));
+  sl.registerFactory(() => WheelBlocBloc(getWheelDataUseCase: sl(),getUserInfoUseCase: sl()));
   sl.registerFactory(() => AdsAndRateBloc());
   // useCase
   sl.registerLazySingleton(() => GetWheelDataUseCase(sl()));
+  sl.registerLazySingleton(() => GetUserInfoUseCase(wheelRepository: sl()));
   sl.registerLazySingleton(() => SetPrizeUseCase(sl()));
   // repository
   sl.registerLazySingleton<WheelRepository>(() => WheelRepositoryImp(

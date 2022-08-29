@@ -180,6 +180,13 @@ class RegisterScreen extends StatelessWidget {
                                     registerEntity: registerEntity));
                               }
                             }),
+                        BottomTextWidget(
+                          firstText: 'Already have an Account?'.tr(context),
+                          secondText: 'LOG IN'.tr(context),
+                          onTap: () {
+                            AutoRouter.of(context).pushNamed('/homePage');
+                          },
+                        ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.01,
                         ),
@@ -188,7 +195,8 @@ class RegisterScreen extends StatelessWidget {
                             secondText: 'LOG IN'.tr(context),
                             onTap: () {
                               AutoRouter.of(context).pushNamed('/login');
-                            })
+                            },
+                        )
                       ],
                     ),
                   ),

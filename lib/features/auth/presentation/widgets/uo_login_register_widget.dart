@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 
 class UpLoginRegisterWidget extends StatelessWidget {
   String text;
-   UpLoginRegisterWidget({Key? key,required this.text}) : super(key: key);
+
+  UpLoginRegisterWidget({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return           Stack(
+    return Stack(
       alignment: AlignmentDirectional.topStart,
-      children:  [
-       const Image(
+      children: [
+         Image(
           image: AssetImage('assets/images/login_upp.png'),
+          width: double.infinity,
+          fit: BoxFit.cover,
         ),
         Padding(
-          padding:const EdgeInsetsDirectional.only(
+          padding: const EdgeInsetsDirectional.only(
             top: 49.35,
           ),
           child: Align(

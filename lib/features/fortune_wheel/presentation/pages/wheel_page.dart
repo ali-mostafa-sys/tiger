@@ -101,7 +101,7 @@ class WheelPage extends StatelessWidget {
                             child: RightBar(tap1: () {
                               bloc.add(ShowShopDialogEvent());
                             }, tap2: () {
-                              print('xxx');
+                              print(h);
                             }),
                           ),
                           ////////////// home

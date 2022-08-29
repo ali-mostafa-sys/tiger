@@ -25,3 +25,11 @@ class PickShopItemEvent extends WheelEvent {
   @override
   List<Object> get props => [shopValue];
 }
+
+class GetUserInfoEvent extends WheelEvent{
+  final String token;
+
+const  GetUserInfoEvent({required this.token});
+  @override
+  List<Object> get props => [token];
+}

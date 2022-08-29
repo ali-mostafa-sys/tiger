@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tiger/core/errors/exceptions.dart';
+import 'package:tiger/core/strings/consts.dart';
 import 'package:tiger/features/auth/data/models/google_model.dart';
 import 'package:tiger/features/auth/data/models/login_model.dart';
 import 'package:tiger/features/auth/data/models/register_model.dart';
@@ -16,7 +17,7 @@ abstract class AuthDataSource {
   Future<GoogleModel> getGoogleEmail();
 }
 
-const BASE_URL = '192.168.1.3:8000';
+
 
 class AuthDataSourceImpl implements AuthDataSource {
   final http.Client client;

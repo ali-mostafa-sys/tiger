@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 
 class RainWidget extends StatefulWidget {
   final bool display;
-  final double minHigh;
+
+//  final double minHigh;
   final int duration;
   final int delay;
 
   const RainWidget({
     Key? key,
     required this.display,
-    this.minHigh = -500,
+    //  this.minHigh = -500,
     required this.duration,
     required this.delay,
   }) : super(key: key);
@@ -24,10 +25,10 @@ class _RainWidgetState extends State<RainWidget> {
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     return TranslationAnimatedWidget(
-      delay: Duration(seconds: widget.delay),
+        delay: Duration(seconds: widget.delay),
         enabled: widget.display,
         values: [
-          Offset(0, widget.minHigh),
+          h > 800 ? Offset(0, h - h - 1000) : Offset(0, -500),
           Offset(0, h),
         ],
         duration: Duration(seconds: widget.duration),
@@ -36,7 +37,8 @@ class _RainWidgetState extends State<RainWidget> {
           height: 90,
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/images/uc_icon.png'), fit: BoxFit.cover)),
+                  image: AssetImage('assets/images/uc_icon.png'),
+                  fit: BoxFit.cover)),
         ));
   }
 }

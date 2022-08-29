@@ -2,8 +2,7 @@
   "Email": "Email",
   "Email should not be empty": "Email should not be empty",
   "Pleas insert a correct Email": "Pleas insert a correct Email",
-
-"Password": "Password",
+  "Password": "Password",
   "Password must be more than 8 characters": "Password must be more than 8 characters",
   "Password should not be more than 20 characters": "Password should not be more than 20 characters",
   "Password must has upper case characters": "Password must has upper case characters",
@@ -27,8 +26,11 @@
   "CONGRATS": "CONGRATS",
   "YOU WIN": "YOU WIN",
   "CONTINUE": "CONTINUE",
-
   "OrderValue": "Order Value",
   "Cancel": "Cancel",
-  "Order": "Order"
+  "Order": "Order",
+  "First Name": "First Name",
+  "Last Name": "Last Name",
+  "First Name should not be empty": "First Name should not be empty",
+  "Last Name should not be empty": "Last Name should not be empty"
 }

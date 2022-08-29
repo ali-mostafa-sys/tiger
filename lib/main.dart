@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiger/core/app_theme.dart';
 import 'package:tiger/core/routes/routes.gr.dart';
@@ -43,6 +44,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<WheelBlocBloc>(),),
       ],
       child: MaterialApp.router(
+        builder: (context,widget)=>ResponsiveWrapper.builder(
+          ClampingScrollWrapper.builder(context, widget!,),
+            // breakpoints:const [
+            //   ResponsiveBreakpoint.autoScale(400,name: MOBILE),
+            //   ResponsiveBreakpoint.autoScale(600,name: TABLET),
+            //   ResponsiveBreakpoint.autoScale(800,name: DESKTOP),
+            //
+            // ],
+          minWidth: 200,
+          maxWidth: 600
+
+        ),
+
         supportedLocales: const [Locale('en'), Locale('ar')],
         localizationsDelegates: const [
           //  CountryLocalizations.delegate,

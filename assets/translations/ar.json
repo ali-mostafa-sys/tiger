@@ -26,8 +26,11 @@
   "CONGRATS": "مبروك",
   "YOU WIN": "لقد ربحت",
   "CONTINUE": "متابعة",
-
   "OrderValue": "قيمة الطلب",
   "Cancel": "رجوع",
-  "Order": "طلب"
+  "Order": "طلب",
+  "First Name": "الاسم",
+  "Last Name": "الكنية",
+  "First Name should not be empty": "لا يجب أن يكون حقل الاسم فارغاً",
+  "Last Name should not be empty": "لا يجب أن يكون حقل الكنية فارغاً"
 }

@@ -59,3 +59,21 @@ class PickShopItemState extends WheelState {
   @override
   List<Object> get props => [isState];
 }
+/// here for get user info
+ class loadingGetUserInfoState extends WheelState{}
+
+ class loadedGetUserInfoState extends WheelState{
+  final UserInfoEntity userInfoEntity;
+
+const  loadedGetUserInfoState({required this.userInfoEntity});
+  @override
+  List<Object> get props => [userInfoEntity];
+ }
+
+ class ErrorGetUserInfoState extends WheelState{
+  final String error;
+
+ const ErrorGetUserInfoState({required this.error});
+  @override
+  List<Object> get props => [error];
+ }

@@ -54,6 +54,7 @@ dependencies:
   flutter_fortune_wheel:
   in_app_review: ^2.0.4
   auto_size_text:
+  responsive_framework:
 
 
 

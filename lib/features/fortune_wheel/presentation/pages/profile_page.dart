@@ -9,7 +9,6 @@ class ProfilePage extends StatelessWidget {
   TextEditingController password = TextEditingController();
   TextEditingController firstName = TextEditingController();
   TextEditingController lastName = TextEditingController();
-  TextEditingController email = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -47,38 +46,30 @@ class ProfilePage extends StatelessWidget {
           child: Form(
             key: formKey,
             child: Padding(
-              padding: EdgeInsets.only(
-                  right: 20,
-                  left: 20,
-                  top: h * 0.1),
+              padding: EdgeInsets.only(right: 20, left: 20, top: h * 0.1),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextFormWidget(
                     controller: firstName,
-                    labelText: 'First Name',
+                    labelText: 'First Name'.tr(context),
                     textInputType: TextInputType.text,
-                    validator: (value) {},
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'First Name should not be empty'.tr(context);
+                      }
+                    },
                   ),
                   const SizedBox(
                     height: 15,
                   ),
                   TextFormWidget(
                     controller: lastName,
-                    labelText: 'Last Name',
+                    labelText: 'Last Name'.tr(context),
                     textInputType: TextInputType.text,
-                    validator: (value) {},
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  TextFormWidget(
-                    controller: email,
-                    labelText: 'Email'.tr(context),
-                    textInputType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Email should not be empty'.tr(context);
+                        return 'Last Name should not be empty'.tr(context);
                       }
                     },
                   ),
@@ -105,32 +96,33 @@ class ProfilePage extends StatelessWidget {
                     height: 15,
                   ),
                   Padding(
-                    padding:  const EdgeInsets.symmetric(horizontal: 40),
-                    child: CustomButton(hexaColor1: '#6B5A7E',hexaColor2: '#5A4D68',
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: CustomButton(
+                      hexaColor1: '#6B5A7E',
+                      hexaColor2: '#5A4D68',
                       text: "Update",
-                        h1: h*0.09,
-                        h2:  h*0.08,
-                        tap: (){
-                        if(formKey.currentState!.validate()){
+                      h1: h * 0.09,
+                      h2: h * 0.08,
+                      tap: () {
+                        if (formKey.currentState!.validate()) {
                           return null;
                         }
-                        },
+                      },
                     ),
                   ),
-
                 ],
               ),
             ),
           ),
         ),
         Container(
-          margin: EdgeInsets.only(bottom: h*0.65),
-          width: w*0.4,
-          height: w*0.4,
+          margin: EdgeInsets.only(bottom: h * 0.65),
+          width: w * 0.4,
+          height: w * 0.4,
           decoration: BoxDecoration(
               border: Border.all(
                 width: 3,
-                color:  Colors.grey,
+                color: Colors.grey,
               ),
               shape: BoxShape.circle,
               boxShadow: [
@@ -138,16 +130,13 @@ class ProfilePage extends StatelessWidget {
                   color: Colors.grey.shade900,
                 ),
                 const BoxShadow(
-                  color:  Colors.grey,
+                  color: Colors.grey,
                   spreadRadius: -1.0,
                   blurRadius: 20.0,
                 ),
               ],
               image: const DecorationImage(
-                image:
-                AssetImage('assets/images/8.png'),
-                fit: BoxFit.cover
-              )),
+                  image: AssetImage('assets/images/8.png'), fit: BoxFit.cover)),
         ),
       ],
     );
