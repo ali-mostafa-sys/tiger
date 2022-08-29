@@ -29,7 +29,7 @@ class ShopWidget extends StatelessWidget {
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: 23,
-                    letterSpacing: 0,
+                    letterSpacing: 1,
                     fontWeight: FontWeight.bold,
                     foreground: Paint()
                       ..style = PaintingStyle.stroke
@@ -43,7 +43,7 @@ class ShopWidget extends StatelessWidget {
                   maxLines: 1,
                   style: TextStyle(
                     fontSize: 23,
-                    letterSpacing: 0,
+                    letterSpacing: 1,
                     fontWeight: FontWeight.bold,
                     color: HexColor('#806644'),
                   ),

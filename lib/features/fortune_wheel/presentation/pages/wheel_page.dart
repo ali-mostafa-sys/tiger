@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -12,6 +11,7 @@ import 'package:tiger/features/fortune_wheel/presentation/widgets/right_bar.dart
 import 'package:tiger/features/fortune_wheel/presentation/widgets/shop_dialog.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/wheel_widget.dart';
 import '../bloc/wheel/wheel_bloc.dart';
+import '../widgets/rightbarwidget.dart';
 
 class WheelPage extends StatelessWidget {
   const WheelPage({
@@ -60,7 +60,7 @@ class WheelPage extends StatelessWidget {
               ),
               ////// opacity container
               Container(
-                color: Colors.black.withOpacity(0.3),
+                color: Colors.black.withOpacity(0.4),
               ),
               /////////////////////////////////
               Padding(
@@ -98,35 +98,27 @@ class WheelPage extends StatelessWidget {
                           //right bar
                           Align(
                             alignment: Alignment.topRight,
-                            child: RightBar(tap1: () {
-                              bloc.add(ShowShopDialogEvent());
-                            }, tap2: () {
-                              print(h);
-                            }),
+                            child: RightBar(
+                                tap1: () {
+                                  bloc.add(ShowShopDialogEvent());
+                                },
+                                tap2: () {}),
                           ),
-                          ////////////// home
-                          Positioned(
-                            top: (h / 2 - 75) - (h * 0.02) - w * 0.85 / 1.6,
-                            left: w < h
-                                ? w / 2 - ((w * 0.85 / 4))
-                                : w / 2 - ((h * 0.5 / 4)),
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/images/7.png',
-                                  fit: BoxFit.cover,
-                                  width: w < h ? w * 0.85 / 2 : h * 0.5 / 2,
+                          //////////ads btton
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: SizedBox(
+                                width: (w / 5) -20,
+                                height: (w / 5) -20,
+                                child: RightBarWidget(
+                                  img: 'assets/images/adwords.png',
+                                  text: 'AD',
+                                  textSize: 12,
+                                  tap: () {},
                                 ),
-                                Positioned(
-                                    left: w < h
-                                        ? w / 2 - ((w * 0.85 / 3.1))
-                                        : w / 2 - ((h * 0.5 / 3.1)),
-                                    child: const AutoSizeText(
-                                      '20',
-                                      style: TextStyle(color: Colors.white),
-                                    )),
-                              ],
+                              ),
                             ),
                           ),
                           ///////// wheel
@@ -141,7 +133,6 @@ class WheelPage extends StatelessWidget {
                               selected: bloc.selected,
                             ),
                           ),
-
                           ////// bubble bar
 
                           Padding(
@@ -170,8 +161,8 @@ class WheelPage extends StatelessWidget {
                                   hexaColor1: bloc.buttonColor1,
                                   hexaColor2: bloc.buttonColor2,
                                   text: 'SPIN'.tr(context),
-                                  h1: h / 8,
-                                  h2: h / 9.5,
+                                  h1: h / 9,
+                                  h2: h / 10.5,
                                   tap: () {
                                     if (bloc.isPressed == false) {
                                       bloc.add(PressWheelButtonEvent());
