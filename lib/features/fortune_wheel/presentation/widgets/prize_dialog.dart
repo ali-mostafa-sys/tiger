@@ -1,8 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tiger/core/localizations/app_loaclizations.dart';
+
+import 'package:tiger/core/widgets/loading_widget.dart';
+import 'package:tiger/features/fortune_wheel/presentation/bloc/wheel/wheel_bloc.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/button.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/first_container.dart';
 
@@ -10,8 +14,13 @@ import 'package:tiger/features/fortune_wheel/presentation/widgets/first_containe
 class PrizeDialogWidget extends StatelessWidget {
   final int reward;
   bool isPop = false;
+ // var onTap;
 
-  PrizeDialogWidget({Key? key, required this.reward}) : super(key: key);
+  PrizeDialogWidget({Key? key,
+    required this.reward,
+  //  required this.onTap
+   // ,required this.isPop
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -69,19 +78,39 @@ class PrizeDialogWidget extends StatelessWidget {
           //////////////
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: CustomButton(
-              hexaColor1: '#6B5A7E',
-              hexaColor2: '#5A4D68',
-              text: 'CONTINUE'.tr(context),
-              textSize: 20,
-              h1: h * 0.075,
-              h2: h * 0.065,
-              tap: () {
-                isPop = true;
-                AutoRouter.of(context).pop();
-              },
+            child: BlocConsumer<WheelBlocBloc,WheelState>(
+                listener: (context, state) {
+                  if(state is loadedGetUserInfoState){
+                    isPop = true;
+                    AutoRouter.of(context).pop();
+                  }
+
+                },
+                builder: (context, state) {
+                  if(state is LoadingAddToPointsState){
+                    return const LoadingWidget();
+                  }
+                  if(state is loadingGetUserInfoState){
+                    return const LoadingWidget();
+                  }
+                  return CustomButton(
+                    hexaColor1: '#6B5A7E',
+                    hexaColor2: '#5A4D68',
+                    text: 'CONTINUE'.tr(context),
+                    textSize: 20,
+                    h1: h * 0.075,
+                    h2: h * 0.065,
+                    tap: () {
+                      WheelBlocBloc.get(context).add(AddToPointsEvent());
+
+
+
+                    },
+                  );
+                },
             ),
-          )
+            ),
+
         ],
       ),
     );

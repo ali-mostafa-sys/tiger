@@ -8,12 +8,13 @@ import 'package:tiger/features/fortune_wheel/data/models/wheel_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class WheelRemoteDataSource {
-  Future<List<WheelModel>> getWheelData();
-  Future<Unit> setPrize(WheelModel wheelModel);
-  Future<UserInfoModel>getUserInfoData(String token);
+  Future<List<WheelModel>> getWheelData(String token);
+
+  Future<Unit> setPrize(int wheelModel,String token);
+  Future<Unit> sendOrder(int wheelModel,String token);
+
+  Future<UserInfoModel> getUserInfoData(String token);
 }
-
-
 
 class WheelRemoteDataSourceImp implements WheelRemoteDataSource {
   final http.Client client;
@@ -22,14 +23,21 @@ class WheelRemoteDataSourceImp implements WheelRemoteDataSource {
 
   @override
   //////////////////////////////////////////////////////////////////
-  Future<List<WheelModel>> getWheelData() async {
-    final response = await client.get(Uri.parse(BASE_URL + ''),
-        headers: {'Content_Type': 'application/json'});
+  Future<List<WheelModel>> getWheelData(String token) async {
+    final uri = Uri.http(
+      BASE_URL,
+      '/api/user/getWheelData',
+    );
+    final response = await client.get(
+      uri,
+      headers: {'Authorization': 'Bearer $token'},
+    );
 
     if (response.statusCode == 200) {
-      final List decodedJson = json.decode(response.body) as List;
+      final  decodedJson = json.decode(response.body) ;
+      final List data= decodedJson['data'] as List;
       final List<WheelModel> wheelModels =
-          decodedJson.map((e) => WheelModel.fromJson(e)).toList();
+          data.map((e) => WheelModel.fromJson(e)).toList();
       return wheelModels;
     } else {
       throw ServerException();
@@ -38,18 +46,25 @@ class WheelRemoteDataSourceImp implements WheelRemoteDataSource {
 
   ////////////////////////////////////////////////////////////////////
   @override
-  Future<Unit> setPrize(WheelModel wheelModel) async {
-    final body = wheelModel.toJson();
+  Future<Unit> setPrize(int wheelModel,String token) async {
 
-    // final body = {
-    //   'ucValue': wheelModel.ucValue,
-    // };
+
+    final uri = Uri.http(
+      BASE_URL,
+      '/api/user/addToPointsRoll',
+    );
 
     final response = await client.post(
-      Uri.parse(BASE_URL + ''),
-      body: body,
+      uri,
+      headers: {'Authorization': 'Bearer $token'},
+      body:{
+        'number':wheelModel.toString()
+      }
     );
-    if (response.statusCode == 201) {
+
+
+
+    if (response.statusCode == 200) {
       return Future.value(unit);
     } else {
       throw ServerException();
@@ -57,23 +72,48 @@ class WheelRemoteDataSourceImp implements WheelRemoteDataSource {
   }
 
   @override
-  Future<UserInfoModel> getUserInfoData(String token) async{
-   final uri=Uri.http(BASE_URL, '',);
+  Future<UserInfoModel> getUserInfoData(String token) async {
+    final uri = Uri.http(
+      BASE_URL,
+      '/api/user/getUserInfo',
+    );
 
-   final response=await client.get(uri,headers: {
-     'Authorization':'Bearer $token',
+    final response = await client.get(
+      uri,
+      headers: {'Authorization': 'Bearer $token'},
+    );
 
-   });
-   if(response.statusCode==200){
-     final data = jsonDecode(response.body);
-     final userInfoData=UserInfoModel.fromJson(data);
-     return userInfoData;
-   }else{
-     throw ServerException();
-   }
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
 
+      final userInfoData = UserInfoModel.fromJson(data);
+      return userInfoData;
+    } else {
+      throw ServerException();
+    }
+  }
 
+  @override
+  Future<Unit> sendOrder(int ucValue, String token)async {
+    final uri = Uri.http(
+      BASE_URL,
+      '/api/user/order',
+    );
+    print('here');
+    final response = await client.post(
+        uri,
+        headers: {'Authorization': 'Bearer $token'},
+        body:{
+          'uc_value':ucValue.toString()
+        }
+    );
+    print('ok');
+    print(response.statusCode);
 
-
+    if (response.statusCode == 201) {
+      return Future.value(unit);
+    } else {
+      throw ServerException();
+    }
   }
 }

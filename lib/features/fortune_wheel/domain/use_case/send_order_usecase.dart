@@ -3,12 +3,12 @@ import 'package:tiger/core/errors/failures.dart';
 
 import 'package:tiger/features/fortune_wheel/domain/repositories/wheel_repository.dart';
 
-class SetPrizeUseCase {
+class SendOrderUseCase {
   final WheelRepository wheelRepository;
 
-  SetPrizeUseCase(this.wheelRepository);
+  SendOrderUseCase(this.wheelRepository);
 
-  Future<Either<Failure, Unit>> call( int wheelEntity, String token) async {
-    return await wheelRepository.setPrize(wheelEntity,token);
+  Future<Either<Failure, Unit>> call( int ucValue, String token) async {
+    return await wheelRepository.sendOrder(ucValue,token);
   }
 }

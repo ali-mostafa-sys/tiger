@@ -7,7 +7,13 @@ abstract class WheelEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetWheelDataEvent extends WheelEvent {}
+class GetWheelDataEvent extends WheelEvent {
+  final String token;
+
+ const GetWheelDataEvent({required this.token});
+  @override
+  List<Object> get props => [token];
+}
 
 class RefreshWheelDataEvent extends WheelEvent {}
 
@@ -33,3 +39,11 @@ const  GetUserInfoEvent({required this.token});
   @override
   List<Object> get props => [token];
 }
+
+
+/// for add to points
+ class AddToPointsEvent extends WheelEvent{ }
+
+
+ // here for send Order
+ class SendOrderEvent extends WheelEvent{ }

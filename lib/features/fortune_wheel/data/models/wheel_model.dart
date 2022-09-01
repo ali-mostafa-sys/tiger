@@ -4,12 +4,12 @@ class WheelModel extends WheelEntity {
   const WheelModel({required int ucValue}) : super(ucValue: ucValue);
 
   factory WheelModel.fromJson(Map<String, dynamic> json) {
-    return WheelModel(ucValue: json['ucValue']);
+    return WheelModel(ucValue: json['uc_value']);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'ucValue': ucValue,
+      'number': ucValue,
     };
   }
 }

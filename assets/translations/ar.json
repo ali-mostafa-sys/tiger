@@ -32,5 +32,9 @@
   "First Name": "الاسم",
   "Last Name": "الكنية",
   "First Name should not be empty": "لا يجب أن يكون حقل الاسم فارغاً",
-  "Last Name should not be empty": "لا يجب أن يكون حقل الكنية فارغاً"
+  "Last Name should not be empty": "لا يجب أن يكون حقل الكنية فارغاً",
+  "You can not order this prize because you do not have this amount": "لا يمكنك طلب هذه النقاط لان قيمة نقاطك أقل من المطلوب",
+  "You can not order your prize because your points is zero": "لا يمكنك طلب الجائزة لان قيمة نقاطك صفر",
+  "Order has been send": "تم إرسال الطلب بنجاح",
+  "You can not order zero": "لا يمكن طلب القيمة صفر"
 }

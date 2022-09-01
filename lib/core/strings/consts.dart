@@ -1,6 +1,6 @@
 String? TOKEN ;
 String? invitationCode ;
-const BASE_URL = '192.168.1.3:8000';
+const BASE_URL = '192.168.1.100:8000';
 
 const String VALIDATION_EMAIL =
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";

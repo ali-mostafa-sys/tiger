@@ -2,20 +2,24 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:tiger/features/fortune_wheel/presentation/bloc/wheel/wheel_bloc.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/wheel_item_widget.dart';
 
 class WheelWidget extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   final selected;
   final List<int> items;
+
   // ignore: prefer_typing_uninitialized_variables
   final onWheelEnd;
+  final String remainRoll;
 
   const WheelWidget(
       {Key? key,
       required this.selected,
       required this.items,
-      required this.onWheelEnd})
+      required this.onWheelEnd,
+      required this.remainRoll})
       : super(key: key);
 
   @override
@@ -23,8 +27,8 @@ class WheelWidget extends StatelessWidget {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return SizedBox(
-      width:  w * 0.85,
-      height: w * 0.85+h*0.09,
+      width: w * 0.85,
+      height: w * 0.85 + h * 0.09,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -43,8 +47,8 @@ class WheelWidget extends StatelessWidget {
                     left: w < h
                         ? w / 2 - ((w * 0.85 / 3.1))
                         : w / 2 - ((h * 0.5 / 3.1)),
-                    child: const AutoSizeText(
-                      '20',
+                    child: AutoSizeText(
+                      remainRoll,
                       style: TextStyle(color: Colors.white),
                     )),
               ],
@@ -115,7 +119,8 @@ class WheelWidget extends StatelessWidget {
                                                   letterSpacing: 1,
                                                   fontWeight: FontWeight.bold,
                                                   foreground: Paint()
-                                                    ..style = PaintingStyle.stroke
+                                                    ..style =
+                                                        PaintingStyle.stroke
                                                     ..strokeWidth = 2.5
                                                     ..color = Colors.black,
                                                 ),
@@ -205,7 +210,8 @@ class WheelWidget extends StatelessWidget {
                                   color: HexColor('#E4D8A5'),
                                   borderColor: HexColor('#E4D8A5')),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: const [Text(''), Text('')],
                               ),
                             )
@@ -214,7 +220,8 @@ class WheelWidget extends StatelessWidget {
                                   color: HexColor('#D96639'),
                                   borderColor: HexColor('#D96639')),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: const [Text(''), Text('')],
                               ),
                             )
@@ -266,10 +273,39 @@ class WheelWidget extends StatelessWidget {
                     image: DecorationImage(
                         image: AssetImage('assets/images/indecator.png'))),
               ),
+              if(WheelBlocBloc.get(context).userInfoEntity!.numberOfRolls==0)
+                _lock(w),
             ],
           ),
         ],
       ),
     );
+
+  }
+  Widget _lock(double w){
+    return               Stack(
+      alignment: Alignment.center,
+      children: [
+        Container(
+          width: w * 0.85 ,
+          height:w * 0.85 ,
+          decoration:  BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.black.withOpacity(0.4)
+          ),
+        ),
+        ///////////////////////////////////
+        Container(
+          width: w * 0.85 -120,
+          height:w * 0.85 -120,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/lock.png'),
+              )
+          ),
+        ),
+      ],
+    );
+
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiger/core/errors/failures.dart';
+import 'package:tiger/core/strings/consts.dart';
 
 import 'package:tiger/core/strings/failures_massage.dart';
 import 'package:tiger/features/auth/domain/entity/google_entity.dart';
@@ -14,6 +15,7 @@ import 'package:tiger/features/auth/domain/entity/login_entity.dart';
 import 'package:tiger/features/auth/domain/entity/user_data_entity.dart';
 import 'package:tiger/features/auth/domain/use_case/google_use_case.dart';
 import 'package:tiger/features/auth/domain/use_case/login_use_case.dart';
+
 
 part 'login_event.dart';
 
@@ -43,6 +45,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         failureOrLogin.fold((failure) async {
           emit(ErrorLoginState(error: _mapFailureToMessage(failure)));
         }, (login) async {
+          print(login.data!.token.toString());
+          TOKEN = sharedPreferences.getString('USER_TOKEN');
+          invitationCode = sharedPreferences.getString('INVITATION_CODE');
           emit(LoadedLoginState(userDataEntity: login));
         });
       }

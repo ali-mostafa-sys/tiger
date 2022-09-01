@@ -19,7 +19,7 @@ class UserInfoModel extends UserInfoEntity {
     final lastName = json['last_name'];
     final email = json['email'];
     final points = json['points'];
-    final numberOfRolls = json['number_of_rolls'];
+    final numberOfRolls = json['remain_roll'];
     return UserInfoModel(
         firstName: firstName,
         lastName: lastName,

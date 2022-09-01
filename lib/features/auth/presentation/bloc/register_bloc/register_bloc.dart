@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mac_address/mac_address.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiger/core/errors/failures.dart';
+import 'package:tiger/core/strings/consts.dart';
 
 import 'package:tiger/core/strings/failures_massage.dart';
 import 'package:tiger/features/auth/domain/entity/google_entity.dart';
@@ -47,6 +48,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         failureOrRegister.fold((failure) async {
           emit(ErrorRegisterState(error: _mapFailureToMessage(failure)));
         }, (register) async {
+          TOKEN = sharedPreferences.getString('USER_TOKEN');
+          invitationCode = sharedPreferences.getString('INVITATION_CODE');
+
           emit(LoadedRegisterState(userDataEntity: register));
         });
       }

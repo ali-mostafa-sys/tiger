@@ -2,7 +2,7 @@ import 'package:tiger/core/errors/exceptions.dart';
 import 'package:tiger/core/network/network_info.dart';
 import 'package:tiger/features/fortune_wheel/data/data_source/wheel_local_datasource.dart';
 import 'package:tiger/features/fortune_wheel/data/data_source/wheel_remote_datasource.dart';
-import 'package:tiger/features/fortune_wheel/data/models/wheel_model.dart';
+
 import 'package:tiger/features/fortune_wheel/domain/entity/user_info_entity.dart';
 import 'package:tiger/features/fortune_wheel/domain/entity/wheel_entity.dart';
 import 'package:tiger/core/errors/failures.dart';
@@ -20,10 +20,10 @@ class WheelRepositoryImp implements WheelRepository {
       required this.wheelLocalDataSource});
   ///////////////////////////////////////////////////////////////////////////
   @override
-  Future<Either<Failure, List<WheelEntity>>> getWheelData() async {
-    if (await networkInfo.isConnected) {
+  Future<Either<Failure, List<WheelEntity>>> getWheelData(String token) async {
+   // if (await networkInfo.isConnected) {
       try {
-        final remoteWheelData = await wheelRemoteDataSource.getWheelData();
+        final remoteWheelData = await wheelRemoteDataSource.getWheelData(token);
 
         wheelLocalDataSource.cacheWheelData(remoteWheelData);
 
@@ -31,38 +31,38 @@ class WheelRepositoryImp implements WheelRepository {
       } on ServerException {
         return Left(ServerFailure());
       }
-    } else {
-      try {
-        final localWheelData = await wheelLocalDataSource.getLocalWheelData();
-        return Right(localWheelData);
-      } on EmptyCacheException {
-        return Left(EmptyCacheFailure());
-      }
-    }
+    // } else {
+    //   try {
+    //     final localWheelData = await wheelLocalDataSource.getLocalWheelData();
+    //     return Right(localWheelData);
+    //   } on EmptyCacheException {
+    //     return Left(EmptyCacheFailure());
+    //   }
+    // }
   }
 
   ///////////////////////////////////////////////////////////////////////////
   @override
-  Future<Either<Failure, Unit>> setPrize(WheelEntity wheelEntity) async {
-    final WheelModel wheelModel = WheelModel(ucValue: wheelEntity.ucValue);
+  Future<Either<Failure, Unit>> setPrize(int wheelEntity,String token) async {
 
-    if (await networkInfo.isConnected) {
+
+   // if (await networkInfo.isConnected) {
       try {
-        await wheelRemoteDataSource.setPrize(wheelModel);
+        await wheelRemoteDataSource.setPrize(wheelEntity,token);
         return const Right(unit);
       } on ServerException {
         return Left(ServerFailure());
       }
-    } else {
-
-      return Left(OfflineFailure());
-
-    }
+    // } else {
+    //
+    //   return Left(OfflineFailure());
+    //
+    // }
   }
 
   @override
   Future<Either<Failure, UserInfoEntity>> getUserInfoData(String token) async{
-   if(await networkInfo.isConnected){
+  // if(await networkInfo.isConnected){
      try{
      final userDataInfo=  await wheelRemoteDataSource.getUserInfoData(token);
 
@@ -70,14 +70,31 @@ class WheelRepositoryImp implements WheelRepository {
      }on ServerException{
        return Left(ServerFailure());
      }
-   }else {
+   // }else {
+   //
+   //   return Left(OfflineFailure());
+   //
+   // }
 
-     return Left(OfflineFailure());
-
-   }
 
 
 
+  }
+
+  @override
+  Future<Either<Failure, Unit>> sendOrder(int ucValue, String token)async {
+    // if (await networkInfo.isConnected) {
+    try {
+      await wheelRemoteDataSource.sendOrder(ucValue,token);
+      return const Right(unit);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+    // } else {
+    //
+    //   return Left(OfflineFailure());
+    //
+    // }
 
   }
 }

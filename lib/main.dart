@@ -8,6 +8,7 @@ import 'package:tiger/core/routes/routes.gr.dart';
 import 'package:tiger/core/strings/consts.dart';
 import 'package:tiger/features/auth/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:tiger/features/auth/presentation/bloc/register_bloc/register_bloc.dart';
+import 'package:tiger/features/fortune_wheel/presentation/bloc/ads_and_rate/ads_and_rate_bloc.dart';
 import 'core/localizations/app_loaclizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'features/fortune_wheel/presentation/bloc/wheel/wheel_bloc.dart';
@@ -39,9 +40,16 @@ class MyApp extends StatelessWidget {
     ]);
     return MultiBlocProvider(
       providers: [
+
         BlocProvider(create: (_) => di.sl<LoginBloc>()),
         BlocProvider(create: (_) => di.sl<RegisterBloc>()),
-        BlocProvider(create: (context) => di.sl<WheelBlocBloc>(),),
+        BlocProvider(create: (context) => di.sl<WheelBlocBloc>()..add(GetUserInfoEvent(token: TOKEN.toString()))
+          ..add(GetWheelDataEvent(token: TOKEN.toString())),
+        ),
+        BlocProvider(create: (_)=>di.sl<AdsAndRateBloc>()..add(InitializeAdsEvent())),
+
+
+
       ],
       child: MaterialApp.router(
         builder: (context,widget)=>ResponsiveWrapper.builder(

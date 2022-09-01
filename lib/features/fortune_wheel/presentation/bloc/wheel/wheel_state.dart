@@ -77,3 +77,28 @@ const  loadedGetUserInfoState({required this.userInfoEntity});
   @override
   List<Object> get props => [error];
  }
+ // here for add to points state
+class LoadingAddToPointsState extends WheelState{}
+
+class LoadedAddToPointsState extends WheelState{
+
+}
+class ErrorAddToPointsState extends WheelState{
+  final String error;
+
+const  ErrorAddToPointsState({required this.error});
+  @override
+  List<Object> get props => [error];
+}
+
+// here for send order
+class LoadingSendOrderState extends WheelState{}
+
+class LoadedSendOrderState extends WheelState{}
+class ErrorSendOrderState extends WheelState{
+  final String error;
+
+  const  ErrorSendOrderState({required this.error});
+  @override
+  List<Object> get props => [error];
+}

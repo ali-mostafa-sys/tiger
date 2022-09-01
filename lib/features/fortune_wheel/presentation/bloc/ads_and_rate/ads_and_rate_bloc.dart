@@ -38,7 +38,7 @@ class AdsAndRateBloc extends Bloc<AdsAndRateEvent, AdsAndRateState> {
   }
 
   // here for run ads
-  void _showInterstitialAd() {
+ Future <void> _showInterstitialAd()async {
     if (_interstitialAd != null) {
       _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
         onAdDismissedFullScreenContent: (InterstitialAd ad) {
@@ -105,7 +105,9 @@ class AdsAndRateBloc extends Bloc<AdsAndRateEvent, AdsAndRateState> {
      }
      if(event is ShowAdsEvent){
        emit(ShowAdsState());
-       _showInterstitialAd();
+       _showInterstitialAd().then((value) {
+         _interstitialAd!.dispose();
+       });
      }
     });
   }

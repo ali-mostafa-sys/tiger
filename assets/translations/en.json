@@ -32,5 +32,9 @@
   "First Name": "First Name",
   "Last Name": "Last Name",
   "First Name should not be empty": "First Name should not be empty",
-  "Last Name should not be empty": "Last Name should not be empty"
+  "Last Name should not be empty": "Last Name should not be empty",
+  "You can not order this prize because you do not have this amount": "You can not order this prize because you do not have this amount",
+  "You can not order your prize because your points is zero": "You can not order your prize because your points is zero",
+  "Order has been send": "Order has been send",
+  "You can not order zero": "You can not order zero"
 }

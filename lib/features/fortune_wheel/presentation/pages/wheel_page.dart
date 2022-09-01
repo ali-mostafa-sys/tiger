@@ -3,6 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:tiger/core/localizations/app_loaclizations.dart';
 
+import 'package:tiger/core/widgets/loading_widget.dart';
+
+import 'package:tiger/features/fortune_wheel/presentation/bloc/ads_and_rate/ads_and_rate_bloc.dart';
+
 import 'package:tiger/features/fortune_wheel/presentation/widgets/bubble_bar.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/button.dart';
 import 'package:tiger/features/fortune_wheel/presentation/widgets/first_container.dart';
@@ -28,6 +32,7 @@ class WheelPage extends StatelessWidget {
           //////
           body: BlocConsumer<WheelBlocBloc, WheelState>(
         listener: (context, state) {
+
           print(state);
           if (state is ShowUcValueDialogState) {
             showDialog(
@@ -35,6 +40,15 @@ class WheelPage extends StatelessWidget {
                 builder: (BuildContext context) {
                   return PrizeDialogWidget(
                     reward: state.reward,
+                    // isPop: WheelBlocBloc.get(context).isPop ,
+                    // onTap: (){
+                    //   final wheelEntity=WheelEntity(ucValue: state.reward);
+                    //   WheelBlocBloc.get(context).add(AddToPointsEvent(
+                    //      //token: TOKEN.toString(), wheelEntity: wheelEntity
+                    //   ));
+                    //
+                    // },
+
                   );
                 });
           }
@@ -48,6 +62,13 @@ class WheelPage extends StatelessWidget {
         },
         builder: (context, state) {
           var bloc = WheelBlocBloc.get(context);
+          if(bloc.userInfoEntity==null){
+            return const LoadingWidget();
+          }
+          if(bloc.wheelItems.length<10){
+            return const LoadingWidget();
+          }
+
           return Stack(
             alignment: Alignment.center,
             children: [
@@ -77,11 +98,13 @@ class WheelPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //1
-                            ucValueItem(w),
+
+
+                            ucValueItem(w,'${bloc.userInfoEntity!.points}'),
                             //2
                             logOutItem(w, context),
                             //3
-                            profileItem(w),
+                            profileItem(w,bloc.userInfoEntity!.firstName,bloc.userInfoEntity!.lastName),
                           ],
                         ),
                       ),
@@ -102,7 +125,9 @@ class WheelPage extends StatelessWidget {
                                 tap1: () {
                                   bloc.add(ShowShopDialogEvent());
                                 },
-                                tap2: () {}),
+                                tap2: () {
+
+                                }),
                           ),
                           //////////ads btton
                           Align(
@@ -116,7 +141,9 @@ class WheelPage extends StatelessWidget {
                                   img: 'assets/images/adwords.png',
                                   text: 'AD',
                                   textSize: 12,
-                                  tap: () {},
+                                  tap: () {
+                                    AdsAndRateBloc.get(context).add(ShowAdsEvent());
+                                  },
                                 ),
                               ),
                             ),
@@ -131,6 +158,7 @@ class WheelPage extends StatelessWidget {
                               },
                               items: bloc.wheelItems,
                               selected: bloc.selected,
+                              remainRoll: bloc.userInfoEntity!.numberOfRolls.toString(),
                             ),
                           ),
                           ////// bubble bar
@@ -164,11 +192,15 @@ class WheelPage extends StatelessWidget {
                                   h1: h / 9,
                                   h2: h / 10.5,
                                   tap: () {
-                                    if (bloc.isPressed == false) {
-                                      bloc.add(PressWheelButtonEvent());
-                                    } else {
-                                      print('you cant');
+                                    if(bloc.userInfoEntity!.numberOfRolls>0){
+                                      if (bloc.isPressed == false) {
+                                        bloc.add(PressWheelButtonEvent());
+                                      } else {
+                                        print('you cant');
+                                      }
                                     }
+
+
                                   },
                                 )),
                           ),
@@ -185,7 +217,7 @@ class WheelPage extends StatelessWidget {
     );
   }
 
-  Widget ucValueItem(double w) {
+  Widget ucValueItem(double w, String points) {
     return SizedBox(
       width: w / 3,
       height: 65,
@@ -195,7 +227,7 @@ class WheelPage extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: FirstContainerWidget(
               width: w / 4,
-              text: '200',
+              text: '$points',
               fontSize: 15,
             ),
           ),
@@ -219,7 +251,7 @@ class WheelPage extends StatelessWidget {
     );
   }
 
-  Widget profileItem(double w) {
+  Widget profileItem(double w,String firstName,String lastName) {
     return SizedBox(
       width: w / 3.2,
       child: Stack(
@@ -227,7 +259,7 @@ class WheelPage extends StatelessWidget {
         children: [
           FirstContainerWidget(
             width: w / 4.1,
-            text: 'Ali Mostafa',
+            text: '$firstName'+'$lastName',
             fontSize: 10,
           ),
           //////////////////

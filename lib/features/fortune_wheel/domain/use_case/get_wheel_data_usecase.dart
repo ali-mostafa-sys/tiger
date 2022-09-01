@@ -8,7 +8,7 @@ class GetWheelDataUseCase {
 
   GetWheelDataUseCase(this.wheelRepository);
   
-  Future <Either<Failure,List<WheelEntity>>> call() async{
-    return await wheelRepository.getWheelData();
+  Future <Either<Failure,List<WheelEntity>>> call(String token) async{
+    return await wheelRepository.getWheelData(token);
   }
 }
