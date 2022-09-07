@@ -1,8 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.intellitech.tiger">
+    <uses-permission android:name="com.android.vending.BILLING" />
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="tiger"
+        android:label="Tiger Fortune Wheel"
         android:name="${applicationName}"
         android:resizeableActivity="false"
         android:icon="@mipmap/ic_launcher">

@@ -2,6 +2,8 @@ import 'package:tiger/core/errors/exceptions.dart';
 import 'package:tiger/core/network/network_info.dart';
 import 'package:tiger/features/fortune_wheel/data/data_source/wheel_local_datasource.dart';
 import 'package:tiger/features/fortune_wheel/data/data_source/wheel_remote_datasource.dart';
+import 'package:tiger/features/fortune_wheel/data/models/notifications_model.dart';
+import 'package:tiger/features/fortune_wheel/domain/entity/notifications/notifications_entity.dart';
 
 import 'package:tiger/features/fortune_wheel/domain/entity/user_info_entity.dart';
 import 'package:tiger/features/fortune_wheel/domain/entity/wheel_entity.dart';
@@ -95,6 +97,27 @@ class WheelRepositoryImp implements WheelRepository {
     //   return Left(OfflineFailure());
     //
     // }
+
+  }
+
+  @override
+  Future<Either<Failure, List<NotificationsModel>>> getNotifications(String token)async {
+
+    // if(await networkInfo.isConnected){
+    try{
+      final notification=  await wheelRemoteDataSource.getNotification(token);
+
+      return  Right(notification);
+    }on ServerException{
+      return Left(ServerFailure());
+    }
+    // }else {
+    //
+    //   return Left(OfflineFailure());
+    //
+    // }
+
+
 
   }
 }

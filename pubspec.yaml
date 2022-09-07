@@ -55,6 +55,7 @@ dependencies:
   in_app_review: ^2.0.4
   auto_size_text:
   responsive_framework:
+  rename: ^2.0.1
 
 
 

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:tiger/core/errors/exceptions.dart';
 import 'package:tiger/core/strings/consts.dart';
+import 'package:tiger/features/fortune_wheel/data/models/notifications_model.dart';
 import 'package:tiger/features/fortune_wheel/data/models/user_info_model.dart';
 import 'package:tiger/features/fortune_wheel/data/models/wheel_model.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,7 @@ abstract class WheelRemoteDataSource {
   Future<Unit> sendOrder(int wheelModel,String token);
 
   Future<UserInfoModel> getUserInfoData(String token);
+  Future <List<NotificationsModel>> getNotification(String token);
 }
 
 class WheelRemoteDataSourceImp implements WheelRemoteDataSource {
@@ -99,7 +101,7 @@ class WheelRemoteDataSourceImp implements WheelRemoteDataSource {
       BASE_URL,
       '/api/user/order',
     );
-    print('here');
+
     final response = await client.post(
         uri,
         headers: {'Authorization': 'Bearer $token'},
@@ -107,13 +109,27 @@ class WheelRemoteDataSourceImp implements WheelRemoteDataSource {
           'uc_value':ucValue.toString()
         }
     );
-    print('ok');
-    print(response.statusCode);
+
 
     if (response.statusCode == 201) {
       return Future.value(unit);
     } else {
       throw ServerException();
     }
+  }
+
+  @override
+  Future<List<NotificationsModel>> getNotification(String token)async {
+  final uri =Uri.http(BASE_URL, '');
+  final response= await client.get(uri);
+  if (response.statusCode == 201) {
+
+    final data = jsonDecode(response.body) as List;
+    final notificationsModel= data.map((e) => NotificationsModel.fromJson(e)).toList();
+    return notificationsModel;
+  } else {
+    throw ServerException();
+  }
+
   }
 }

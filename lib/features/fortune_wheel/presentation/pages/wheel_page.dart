@@ -32,8 +32,6 @@ class WheelPage extends StatelessWidget {
           //////
           body: BlocConsumer<WheelBlocBloc, WheelState>(
         listener: (context, state) {
-
-          print(state);
           if (state is ShowUcValueDialogState) {
             showDialog(
                 context: context,
@@ -48,7 +46,6 @@ class WheelPage extends StatelessWidget {
                     //   ));
                     //
                     // },
-
                   );
                 });
           }
@@ -62,10 +59,10 @@ class WheelPage extends StatelessWidget {
         },
         builder: (context, state) {
           var bloc = WheelBlocBloc.get(context);
-          if(bloc.userInfoEntity==null){
+          if (bloc.userInfoEntity == null) {
             return const LoadingWidget();
           }
-          if(bloc.wheelItems.length<10){
+          if (bloc.wheelItems.length < 10) {
             return const LoadingWidget();
           }
 
@@ -99,12 +96,12 @@ class WheelPage extends StatelessWidget {
                           children: [
                             //1
 
-
-                            ucValueItem(w,'${bloc.userInfoEntity!.points}'),
+                            ucValueItem(w, '${bloc.userInfoEntity!.points}'),
                             //2
                             logOutItem(w, context),
                             //3
-                            profileItem(w,bloc.userInfoEntity!.firstName,bloc.userInfoEntity!.lastName),
+                            profileItem(w, bloc.userInfoEntity!.firstName,
+                                bloc.userInfoEntity!.lastName),
                           ],
                         ),
                       ),
@@ -125,9 +122,7 @@ class WheelPage extends StatelessWidget {
                                 tap1: () {
                                   bloc.add(ShowShopDialogEvent());
                                 },
-                                tap2: () {
-
-                                }),
+                                tap2: () {}),
                           ),
                           //////////ads btton
                           Align(
@@ -135,14 +130,15 @@ class WheelPage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: SizedBox(
-                                width: (w / 5) -20,
-                                height: (w / 5) -20,
+                                width: (w / 5) - 20,
+                                height: (w / 5) - 20,
                                 child: RightBarWidget(
                                   img: 'assets/images/adwords.png',
                                   text: 'AD',
                                   textSize: 12,
                                   tap: () {
-                                    AdsAndRateBloc.get(context).add(ShowAdsEvent());
+                                    AdsAndRateBloc.get(context)
+                                        .add(ShowAdsEvent());
                                   },
                                 ),
                               ),
@@ -158,7 +154,8 @@ class WheelPage extends StatelessWidget {
                               },
                               items: bloc.wheelItems,
                               selected: bloc.selected,
-                              remainRoll: bloc.userInfoEntity!.numberOfRolls.toString(),
+                              remainRoll:
+                                  bloc.userInfoEntity!.numberOfRolls.toString(),
                             ),
                           ),
                           ////// bubble bar
@@ -192,15 +189,12 @@ class WheelPage extends StatelessWidget {
                                   h1: h / 9,
                                   h2: h / 10.5,
                                   tap: () {
-                                    if(bloc.userInfoEntity!.numberOfRolls>0){
+                                    if (bloc.userInfoEntity!.numberOfRolls >
+                                        0) {
                                       if (bloc.isPressed == false) {
                                         bloc.add(PressWheelButtonEvent());
-                                      } else {
-                                        print('you cant');
-                                      }
+                                      } else {}
                                     }
-
-
                                   },
                                 )),
                           ),
@@ -227,7 +221,7 @@ class WheelPage extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: FirstContainerWidget(
               width: w / 4,
-              text: '$points',
+              text: points,
               fontSize: 15,
             ),
           ),
@@ -251,7 +245,7 @@ class WheelPage extends StatelessWidget {
     );
   }
 
-  Widget profileItem(double w,String firstName,String lastName) {
+  Widget profileItem(double w, String firstName, String lastName) {
     return SizedBox(
       width: w / 3.2,
       child: Stack(
@@ -259,35 +253,8 @@ class WheelPage extends StatelessWidget {
         children: [
           FirstContainerWidget(
             width: w / 4.1,
-            text: '$firstName'+'$lastName',
+            text: '$firstName $lastName',
             fontSize: 10,
-          ),
-          //////////////////
-          Positioned(
-            left: 0,
-            child: Container(
-              width: 45,
-              height: 45,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 3,
-                    color: HexColor('#BEEDFF'),
-                  ),
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade900,
-                    ),
-                    BoxShadow(
-                      color: HexColor('#0B559E'),
-                      spreadRadius: -1.0,
-                      blurRadius: 20.0,
-                    ),
-                  ],
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/8.png'),
-                  )),
-            ),
           ),
         ],
       ),
